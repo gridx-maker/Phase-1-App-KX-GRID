@@ -56,6 +56,7 @@ const BrandHeadDashboard = () => {
       return;
     }
     fetchDashboard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const fetchDashboard = async () => {
@@ -160,6 +161,7 @@ const BrandHeadDashboard = () => {
     if (activeTab === 'reclasses') {
       fetchReclasses();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   const createCrewMember = async () => {

@@ -297,6 +297,7 @@ const AdminPanel = () => {
       return;
     }
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchData = async () => {
@@ -1033,6 +1034,7 @@ const AdminPanel = () => {
     if (activeTab === 'nfc-users') {
       fetchNfcUsers();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   const updateLeadStatus = async (leadId, status) => {
