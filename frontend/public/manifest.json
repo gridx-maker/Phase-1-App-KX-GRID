@@ -1,0 +1,44 @@
+{
+  "name": "KXGRID - KotlerX Operating Platform",
+  "short_name": "KXGRID",
+  "description": "Unified operating platform for the KotlerX ecosystem",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#00f0ff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "business"],
+  "shortcuts": [
+    {
+      "name": "Student Dashboard",
+      "url": "/student-dashboard",
+      "description": "View your progress and courses"
+    },
+    {
+      "name": "NFC Attendance",
+      "url": "/crew/attendance",
+      "description": "Start attendance session"
+    },
+    {
+      "name": "Programs",
+      "url": "/programs",
+      "description": "Browse available programs"
+    }
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false
+}

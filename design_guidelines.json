@@ -1,0 +1,177 @@
+{
+  "project_name": "KotlerX",
+  "design_philosophy": {
+    "identity": "E1: The Anti-AI Designer",
+    "core_concept": "F1 Telemetry meets Cyberpunk Academy",
+    "emotional_tone": "High-Octane, Precision, Elite, Future-Tech",
+    "principles": [
+      "Fusion over Imitation: Mix Motorsport Telemetry with SaaS Utility",
+      "Emotion First: Every interaction feels like a gear shift or a pit stop",
+      "Content is King: Data is the hero, presented with broadcast clarity",
+      "Contrast: Deep blacks vs. Neon accents for maximum readability"
+    ]
+  },
+  "typography": {
+    "font_family": {
+      "headings": "Unbounded, sans-serif",
+      "body": "Inter, sans-serif",
+      "mono": "JetBrains Mono, monospace",
+      "accent": "Teko, sans-serif"
+    },
+    "imports": [
+      "https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Teko:wght@400;600&display=swap"
+    ],
+    "usage_rules": {
+      "h1": "font-unbounded font-bold text-5xl md:text-7xl tracking-tighter uppercase text-white",
+      "h2": "font-unbounded font-semibold text-3xl md:text-4xl tracking-tight text-white",
+      "h3": "font-unbounded font-medium text-xl md:text-2xl text-white/90",
+      "body": "font-inter text-base text-zinc-400 leading-relaxed",
+      "label": "font-mono text-xs uppercase tracking-widest text-zinc-500",
+      "data_value": "font-mono text-primary font-bold"
+    }
+  },
+  "colors": {
+    "theme": "dark",
+    "palette": {
+      "background": {
+        "default": "#050505",
+        "surface": "#0F0F10",
+        "surface_highlight": "#18181B"
+      },
+      "primary": {
+        "default": "#00F0FF",
+        "hover": "#00C2CC",
+        "foreground": "#000000"
+      },
+      "secondary": {
+        "default": "#7000FF",
+        "hover": "#5A00CC",
+        "foreground": "#FFFFFF"
+      },
+      "accent": {
+        "default": "#FF003C",
+        "warning": "#FFD600",
+        "success": "#00FF94"
+      },
+      "neutral": {
+        "white": "#FFFFFF",
+        "grey_100": "#F4F4F5",
+        "grey_500": "#71717A",
+        "grey_900": "#18181B"
+      }
+    },
+    "gradients": {
+      "brand": "bg-gradient-to-r from-[#7000FF] to-[#00F0FF]",
+      "dark_overlay": "bg-gradient-to-b from-transparent to-[#050505]",
+      "glow_text": "bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400"
+    }
+  },
+  "visual_enhancers": {
+    "borders": {
+      "default": "border border-white/10",
+      "active": "border border-primary/50",
+      "glow": "border border-primary/50 shadow-[0_0_15px_rgba(0,240,255,0.2)]"
+    },
+    "shadows": {
+      "neon_blue": "shadow-[0_0_20px_rgba(0,240,255,0.3)]",
+      "neon_purple": "shadow-[0_0_20px_rgba(112,0,255,0.3)]",
+      "glass": "backdrop-blur-xl bg-black/40 border border-white/10"
+    },
+    "textures": {
+      "grid": "bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]",
+      "noise": "opacity-20 mix-blend-overlay"
+    },
+    "shapes": {
+      "card": "rounded-xl",
+      "button": "rounded-md skew-x-[-10deg] hover:skew-x-0 transition-transform",
+      "badge": "rounded-full px-3 py-1"
+    }
+  },
+  "layout_system": {
+    "grid_strategy": "Bento Grid (High Density)",
+    "spacing": {
+      "container_padding": "p-6 md:p-12",
+      "gap": "gap-6",
+      "section_spacing": "py-24"
+    },
+    "containers": {
+      "dashboard_card": "bg-[#0F0F10] border border-white/5 p-6 rounded-xl relative overflow-hidden group hover:border-primary/30 transition-colors",
+      "marketing_section": "relative z-10 max-w-7xl mx-auto px-6"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-black font-unbounded font-bold uppercase tracking-wider hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all",
+      "secondary": "bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/20 font-inter",
+      "ghost": "text-zinc-400 hover:text-white hover:bg-white/5"
+    },
+    "cards": {
+      "telemetry": "bg-black/40 backdrop-blur-md border border-white/10 p-5 rounded-lg relative before:absolute before:top-0 before:left-0 before:w-full before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-primary/50 before:to-transparent",
+      "feature": "group relative overflow-hidden rounded-2xl bg-zinc-900/50 border border-white/10 p-8 hover:border-primary/50 transition-colors"
+    },
+    "inputs": {
+      "default": "bg-black/50 border-white/10 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 text-white placeholder:text-zinc-600 rounded-md h-12"
+    },
+    "navigation": {
+      "sidebar": "bg-[#050505] border-r border-white/10 w-64 hidden md:flex flex-col",
+      "navbar": "sticky top-0 z-50 w-full border-b border-white/10 bg-black/50 backdrop-blur-xl"
+    }
+  },
+  "motion": {
+    "transitions": {
+      "default": "transition-all duration-300 ease-out",
+      "fast": "transition-all duration-150 ease-out",
+      "bounce": "transition-all duration-500 cubic-bezier(0.34, 1.56, 0.64, 1)"
+    },
+    "animations": {
+      "fade_in": "animate-in fade-in duration-500",
+      "slide_up": "animate-in slide-in-from-bottom-4 duration-500",
+      "pulse_glow": "animate-pulse"
+    }
+  },
+  "image_assets": {
+    "hero_background": {
+      "url": "https://images.unsplash.com/photo-1752686450387-8ffb452288de?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "alt": "Motorsport Race Track Speed",
+      "usage": "Landing Page Hero Background with heavy dark overlay"
+    },
+    "student_profile": {
+      "url": "https://images.unsplash.com/photo-1654911554479-efc687ee22b0?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "alt": "Student in Racing Helmet",
+      "usage": "Student Dashboard Profile / Identity Verification"
+    },
+    "skill_tracking": {
+      "url": "https://images.unsplash.com/photo-1708745427274-d5de5122fd57?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "alt": "Mechanic working on engine",
+      "usage": "Skill Gap Analysis Section / Technical Training"
+    },
+    "certification": {
+      "url": "https://images.unsplash.com/photo-1703248796369-c6e64234fb66?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "alt": "Close up of sports car front",
+      "usage": "Certificate Background Texture"
+    }
+  },
+  "libraries": {
+    "charts": "Recharts (customized with neon strokes and dark backgrounds)",
+    "icons": "Lucide React (stroke-width=1.5)",
+    "3d": "Spline (optional for Hero)",
+    "maps": "React Map GL (Dark Mode)"
+  },
+  "instructions_to_main_agent": [
+    "1. SETUP: Add the Google Fonts import to index.css immediately.",
+    "2. THEME: Force 'dark' class on the html element in index.html or App.js. The app is Dark Mode ONLY.",
+    "3. TAILWIND: Update tailwind.config.js to include the new colors (primary: #00F0FF, secondary: #7000FF) and fonts (Unbounded, Inter).",
+    "4. COMPONENTS: When using Shadcn components, override the default 'radius' to be smaller (0.3rem) and borders to be darker (white/10).",
+    "5. LAYOUT: Use the 'Bento Grid' strategy for the Dashboard. Avoid equal-width columns. Make the 'Gap Analysis' chart the dominant element.",
+    "6. IMAGES: Use the provided Unsplash URLs. Apply a 'grayscale' filter with 'hover:grayscale-0' transition for a dramatic effect in lists.",
+    "7. GLASSMORPHISM: Use the 'glass' utility class defined in visual_enhancers for all floating panels (Nav, Modals, Toasts).",
+    "8. DATA-TESTID: Ensure every interactive element has a data-testid attribute (e.g., 'login-btn', 'nfc-scan-trigger')."
+  ],
+  "universal_guidelines": [
+    "Avoid generic 'AI slop' designs. No centered text blocks without purpose.",
+    "Use 2-3x more spacing than typical. 'p-8' is the new 'p-4'.",
+    "Never use pure black (#000000) for backgrounds, use #050505.",
+    "Always add hover states to interactive elements (color shift + subtle lift).",
+    "Use 'sonner' for toasts, not default alerts."
+  ]
+}
