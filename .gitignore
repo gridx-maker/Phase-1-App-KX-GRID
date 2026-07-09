@@ -1,155 +1,98 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ============================================================
+# KXGRID — .gitignore
+# ============================================================
 
-# IDE and editors
-.idea/
-.vscode/
+# ─── Environment & Secrets ───────────────────────────────────
+.env
+.env.*
+*.env
+*.key
+credentials.json
+token.json
+.credentials
+service_account.json
 
-# Dependencies
+# ─── Python ──────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+venv/
+.venv/
+env/
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ─── Node / Frontend ─────────────────────────────────────────
 node_modules/
-/node_modules
 /.pnp
 .pnp.js
 .yarn/install-state.gz
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
-
-# Testing
-/coverage
-
-# Next.js
-/.next/
-/out/
-next-env.d.ts
-*.tsbuildinfo
-
-# Production builds
-/build
-dist/
-dist
-
-# Environment files (comprehensive coverage)
-
-*token.json*
-*credentials.json*
-
-# Logs and debug files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+
+# ─── React / Frontend Build ──────────────────────────────────
+/frontend/build
+/frontend/dist
+/coverage
+frontend/node_modules/.cache/
+
+# ─── Production Builds ───────────────────────────────────────
+/build
+/out
+dist/
+
+# ─── IDE & Editors ───────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ─── System ──────────────────────────────────────────────────
+*.pem
 dump.rdb
 
-# System files
-.DS_Store
-*.pem
+# ─── Logs ────────────────────────────────────────────────────
+*.log
+logs/
 
-# Python
-__pycache__/
-*pyc*
-venv/
-.venv/
-
-# Development tools
-chainlit.md
-.chainlit
-.ipynb_checkpoints/
-.ac
-
-# Deployment
-.vercel
-
-# Data and databases
-agenthub/agents/youtube/db
-
-# Archive files and large assets
-**/*.zip
-**/*.tar.gz
-**/*.tar
-**/*.tgz
-*.pack
+# ─── Archives & Large Assets ─────────────────────────────────
+*.zip
+*.tar.gz
+*.tar
+*.tgz
 *.deb
 *.dylib
 
-# Build caches
-.cache/
+# ─── TypeScript ──────────────────────────────────────────────
+*.tsbuildinfo
+next-env.d.ts
 
-# Mobile development
-android-sdk/ -e 
-# Environment files
-*.env
-*.env.*
--e 
-# Environment files
-*.env
-*.env.*
--e 
-# Environment files
-*.env
-*.env.*
--e 
-# Environment files
-*.env
-*.env.*
-frontend/node_modules/.cache/default-development/0.pack
--e 
-# Environment files
-*.env
-*.env.*
--e 
-# Environment files
-*.env
-*.env.*
--e 
-# Environment files
-*.env
-*.env.*
--e 
-# Environment files
-*.env
-*.env.*
-frontend/node_modules/.cache/default-development/2.pack
-frontend/node_modules/.cache/default-development/3.pack
-frontend/node_modules/.cache/default-development/4.pack
-frontend/node_modules/.cache/default-development/6.pack
-frontend/node_modules/.cache/default-development/8.pack
-frontend/node_modules/.cache/default-development/9.pack
-frontend/node_modules/.cache/default-development/10.pack
-frontend/node_modules/.cache/default-development/11.pack
-frontend/node_modules/.cache/default-development/14.pack
-frontend/node_modules/.cache/default-development/1.pack
--e 
-# Environment files
-*.env
-*.env.*
-frontend/node_modules/.cache/default-development/5.pack
-frontend/node_modules/.cache/default-development/12.pack
-frontend/node_modules/.cache/default-development/13.pack
-frontend/node_modules/.cache/default-development/15.pack_
-frontend/node_modules/.cache/default-development/15.pack
-frontend/node_modules/.cache/default-development/16.pack
-frontend/node_modules/.cache/default-development/17.pack
-frontend/node_modules/.cache/default-development/18.pack
-frontend/node_modules/.cache/default-development/19.pack
-frontend/node_modules/.cache/default-development/20.pack
-frontend/node_modules/.cache/default-development/21.pack
-frontend/node_modules/.cache/default-development/22.pack
-frontend/node_modules/.cache/default-development/23.pack
-frontend/node_modules/.cache/default-development/24.pack
--e 
-# Environment files
-*.env
-*.env.*
--e 
-# Environment files
-*.env
-*.env.*
-frontend/node_modules/.cache/default-development/1.pack_
-frontend/node_modules/.cache/default-development/3.pack_
-.env
-.env.*
-credentials.json
-*.key
-.credentials
+# ─── Next.js ─────────────────────────────────────────────────
+/.next/
+
+# ─── Deployment ──────────────────────────────────────────────
+.vercel
+
+# ─── Test Artifacts (auto-generated) ─────────────────────────
+test_reports/
+test_result.md
+
+# ─── AI Agent State (Emergent platform leftovers) ────────────
+.emergent/
+memory/
+
+# ─── Misc Dev Artifacts ──────────────────────────────────────
+.cache/
+.chainlit/
+chainlit.md
+.ipynb_checkpoints/
