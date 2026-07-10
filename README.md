@@ -5,7 +5,7 @@
 [![Status: Active](https://img.shields.io/badge/Status-Active-brightgreen)](#)
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/Frontend-React-61DAFB)](https://react.dev/)
-[![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248)](https://www.mongodb.com/)
+[![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-4169E1)](https://www.postgresql.org/)
 [![PWA](https://img.shields.io/badge/PWA-Enabled-5A0FC8)](#)
 
 **Central hub for all KotlerX brands, programs, students, crew, and partners.**  
@@ -174,6 +174,48 @@ Phase-1-App-KX-GRID/
 
 ---
 
+## 🔄 Role-Based Workflow Diagram
+
+```mermaid
+graph TD
+    %% Roles
+    SuperAdmin[👑 Super Admin]
+    Admin[🛡️ Admin]
+    Crew[📱 Crew / Trainer]
+    Student[🎓 Student]
+    BrandHead[🏢 Brand Head]
+
+    %% Database
+    DB[(🐘 PostgreSQL DB)]
+
+    %% Super Admin Actions
+    SuperAdmin -->|Manage Admins & Platform| Admin
+    SuperAdmin -->|Audit Logs / CMS Config| DB
+
+    %% Admin Actions
+    Admin -->|Create Programs, Batches, Units| DB
+    Admin -->|Register Students & Assign NFC| Student
+    Admin -->|Create Crew Accounts & Assign| Crew
+    Admin -->|Assign Brand Heads| BrandHead
+    Admin -->|Sync sheets & reports| DB
+
+    %% Student Actions
+    Student -->|Register & Verify OTP| DB
+    Student -->|View Dashboard / Progress| DB
+    Student -->|Tap NFC Card| Crew
+
+    %% Crew Actions
+    Crew -->|Start Active Session| DB
+    Crew -->|Scan NFC Attendance & Submit| DB
+    Crew -->|Grade Assessments| DB
+
+    %% Brand Head Actions
+    BrandHead -->|View intern performance| DB
+    BrandHead -->|View brand dashboard| DB
+```
+
+---
+
 ## ✨ Features
 
 ### 🔐 Authentication
@@ -237,8 +279,8 @@ Phase-1-App-KX-GRID/
 | Technology | Purpose |
 |---|---|
 | FastAPI | Python async API framework |
-| Motor | Async MongoDB driver |
-| MongoDB | Primary database |
+| asyncpg | Async PostgreSQL client driver |
+| PostgreSQL | Primary database |
 | PyJWT + python-jose | JWT auth |
 | bcrypt | Password hashing |
 | Twilio | SMS notifications |
@@ -254,7 +296,7 @@ Phase-1-App-KX-GRID/
 ### Prerequisites
 - Python 3.10+
 - Node.js 18+
-- MongoDB (local or Atlas)
+- PostgreSQL database server
 
 ### 1. Backend Setup
 ```bash
@@ -291,8 +333,7 @@ The app will open at `http://localhost:3000`
 
 ### `backend/.env`
 ```env
-MONGO_URL=mongodb://localhost:27017
-DB_NAME=kxgrid_db
+POSTGRES_URL=postgresql://postgres:postgres@localhost:5432/kxgrid_db
 JWT_SECRET_KEY=your_secret_key_here
 JWT_ALGORITHM=HS256
 JWT_EXPIRATION_HOURS=168
