@@ -17,6 +17,10 @@ import string
 import qrcode
 from openpyxl import Workbook
 import resend
+import bcrypt
+from io import BytesIO
+from pydantic import BaseModel
+from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
 
 # Core configurations
 from core.database import db
@@ -25,6 +29,9 @@ from core.security import get_current_user, hash_password, verify_password, crea
 
 # Shared models
 from models import *
+
+# Email helpers
+from core.email import send_welcome_email
 
 logger = logging.getLogger(__name__)
 
