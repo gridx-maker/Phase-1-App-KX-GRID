@@ -9,6 +9,7 @@ from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 import gspread
 from google.oauth2.service_account import Credentials
+from core.security import get_current_user
 
 router = APIRouter(prefix="/api/sheets", tags=["Google Sheets"])
 
@@ -59,7 +60,7 @@ async def sheets_status():
     }
 
 @router.post("/export/students")
-async def export_students(data: SyncRequest):
+async def export_students(data: SyncRequest, user: dict = Depends(get_current_user)):
     """Export all students to Google Sheets"""
     if not db:
         raise HTTPException(status_code=500, detail="Database not configured")
@@ -124,7 +125,7 @@ async def export_students(data: SyncRequest):
         raise HTTPException(status_code=500, detail=f"Export failed: {str(e)}")
 
 @router.post("/export/assessments")
-async def export_assessments(data: SyncRequest):
+async def export_assessments(data: SyncRequest, user: dict = Depends(get_current_user)):
     """Export all assessments to Google Sheets"""
     if not db:
         raise HTTPException(status_code=500, detail="Database not configured")
@@ -180,7 +181,7 @@ async def export_assessments(data: SyncRequest):
         raise HTTPException(status_code=500, detail=f"Export failed: {str(e)}")
 
 @router.post("/export/attendance")
-async def export_attendance(data: SyncRequest):
+async def export_attendance(data: SyncRequest, user: dict = Depends(get_current_user)):
     """Export all attendance records to Google Sheets"""
     if not db:
         raise HTTPException(status_code=500, detail="Database not configured")
