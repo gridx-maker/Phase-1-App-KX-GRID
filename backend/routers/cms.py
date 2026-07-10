@@ -274,9 +274,9 @@ async def get_media_gallery(category: str):
             {"_id": 0}
         ).sort("order", 1).to_list(50)
     else:
-        # Public only sees public content
+        # Public only sees public content for the requested category
         items = await db.media_gallery.find(
-            {"category": "public", "is_visible": True},
+            {"category": category, "is_visible": True},
             {"_id": 0}
         ).sort("order", 1).to_list(50)
     return items
