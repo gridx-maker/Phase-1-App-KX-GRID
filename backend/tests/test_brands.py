@@ -359,6 +359,12 @@ class TestBrandManagement:
     def test_seed_defaults_when_brands_exist(self):
         """Test seed defaults returns message when brands already exist"""
         token = self.get_admin_token()
+        # Create a temporary brand to guarantee count > 0
+        requests.post(
+            f"{BASE_URL}/api/admin/brands",
+            headers={"Authorization": f"Bearer {token}"},
+            json={"name": "Temp Brand for Seed Check"}
+        )
         response = requests.post(
             f"{BASE_URL}/api/admin/brands/seed-defaults",
             headers={"Authorization": f"Bearer {token}"}
