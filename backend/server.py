@@ -51,6 +51,12 @@ def app_root():
     """Root endpoint"""
     return {"message": "KotlerX API", "status": "running", "version": "1.0.0"}
 
+@app.get("/api")
+@app.get("/api/")
+def api_root():
+    """API root endpoint"""
+    return {"message": "KotlerX API Root", "status": "running"}
+
 # Include all modular routers under the App
 app.include_router(auth.router, prefix="/api")
 app.include_router(students.router, prefix="/api")
@@ -96,7 +102,64 @@ async def seed_super_admin():
             await db.users.insert_one(super_admin_doc)
             logger.info("KX ROOT Super Admin created")
     except Exception as e:
-        logger.warning(f"Could not seed super admin (will retry on next startup): {e}")
+        logger.warning(f"Could not seed super admin: {e}")
+
+async def seed_regular_admin():
+    """Seed initial standard admin account for testing/dev"""
+    try:
+        admin_exists = await db.users.find_one({"email": "admin@kotlerx.com"})
+        if not admin_exists:
+            admin_doc = {
+                "user_id": "user_admin001",
+                "email": "admin@kotlerx.com",
+                "name": "KX Admin",
+                "password_hash": hash_password("admin123"),
+                "role": "admin",
+                "created_at": datetime.now(timezone.utc).isoformat(),
+                "picture": None
+            }
+            await db.users.insert_one(admin_doc)
+            logger.info("Standard Admin admin@kotlerx.com created")
+    except Exception as e:
+        logger.warning(f"Could not seed standard admin: {e}")
+
+async def seed_default_brands():
+    """Seed default KX brands if none exist"""
+    try:
+        existing = await db.brands.count_documents({})
+        if existing > 0:
+            return
+        
+        default_brands = [
+            {"name": "KX CORE", "description": "Foundation programs for essential skills", "color": "#00f0ff", "order": 1},
+            {"name": "KX PRO", "description": "Professional-grade advanced training", "color": "#ff6b35", "order": 2},
+            {"name": "KX LAB", "description": "Experimental and research programs", "color": "#7c3aed", "order": 3},
+            {"name": "KX MEDIA", "description": "Motorsport journalism and broadcasting", "color": "#f59e0b", "order": 4},
+            {"name": "KX TECH", "description": "Automotive technology and engineering", "color": "#10b981", "order": 5},
+            {"name": "KX RACING", "description": "Professional racing and karting programs", "color": "#ef4444", "order": 6},
+            {"name": "KX BUSINESS", "description": "Motorsport business and management", "color": "#6366f1", "order": 7},
+            {"name": "KX ACADEMY", "description": "Foundational certification courses", "color": "#14b8a6", "order": 8},
+            {"name": "KX EVENTS", "description": "Event management and coordination", "color": "#ec4899", "order": 9},
+            {"name": "KX DESIGN", "description": "Automotive and livery design programs", "color": "#8b5cf6", "order": 10},
+            {"name": "KX SAFETY", "description": "Safety training and marshal programs", "color": "#22c55e", "order": 11},
+            {"name": "KX GLOBAL", "description": "International partnerships and programs", "color": "#0ea5e9", "order": 12},
+            {"name": "KX PARTNERS", "description": "Industry collaboration programs", "color": "#f97316", "order": 13},
+        ]
+        
+        for brand_data in default_brands:
+            brand_id = f"brand_{uuid.uuid4().hex[:12]}"
+            brand_doc = {
+                "brand_id": brand_id,
+                **brand_data,
+                "logo_url": None,
+                "is_visible": True,
+                "created_at": datetime.now(timezone.utc).isoformat(),
+                "created_by": "user_root001"
+            }
+            await db.brands.insert_one(brand_doc)
+        logger.info(f"Seeded {len(default_brands)} default brands")
+    except Exception as e:
+        logger.warning(f"Could not seed default brands: {e}")
 
 async def seed_promo_banners():
     """Seed initial promotional banners"""
@@ -184,6 +247,8 @@ async def startup_event():
     postgres_url = os.environ.get("POSTGRES_URL", "postgresql://postgres:postgres@localhost:5432/kxgrid_db")
     await db.init_pool(postgres_url)
     await seed_super_admin()
+    await seed_regular_admin()
+    await seed_default_brands()
     await seed_promo_banners()
     logger.info("KXGRID API startup complete")
 
