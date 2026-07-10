@@ -181,6 +181,8 @@ async def seed_promo_banners():
 async def startup_event():
     """Application startup event handler"""
     logger.info("KXGRID API starting up...")
+    postgres_url = os.environ.get("POSTGRES_URL", "postgresql://postgres:postgres@localhost:5432/kxgrid_db")
+    await db.init_pool(postgres_url)
     await seed_super_admin()
     await seed_promo_banners()
     logger.info("KXGRID API startup complete")
@@ -191,18 +193,21 @@ async def shutdown_db_client():
     client.close()
 
 # ======================== CORS CONFIGURATION ========================
-CORS_ORIGINS = os.environ.get('CORS_ORIGINS', '*')
+CORS_ORIGINS = os.environ.get('CORS_ORIGINS', '')
 
-if CORS_ORIGINS == "*":
-    allowed_origins = ["*"]
-    allow_creds = False
-else:
+if CORS_ORIGINS:
     allowed_origins = [o.strip() for o in CORS_ORIGINS.split(',') if o.strip()]
-    allow_creds = True
+else:
+    allowed_origins = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173"
+    ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_credentials=allow_creds,
+    allow_credentials=True,
     allow_origins=allowed_origins,
     allow_methods=["*"],
     allow_headers=["*"],
