@@ -135,7 +135,8 @@ const StudentRegistration = () => {
         ...formData,
         age: parseInt(formData.age)
       }, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true
       });
       
       toast.success('Registration complete!');
