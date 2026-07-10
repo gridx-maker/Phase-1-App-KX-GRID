@@ -37,6 +37,14 @@ class TestAuthentication:
     
     def test_student_login(self):
         """Student login returns correct role"""
+        # Ensure student is registered first
+        requests.post(f"{BASE_URL}/api/auth/register", json={
+            "email": STUDENT_EMAIL,
+            "password": STUDENT_PASSWORD,
+            "name": "Regular Student",
+            "role": "student"
+        })
+        
         response = requests.post(f"{BASE_URL}/api/auth/login", json={
             "email": STUDENT_EMAIL,
             "password": STUDENT_PASSWORD
