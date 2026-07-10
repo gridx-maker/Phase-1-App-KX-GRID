@@ -448,7 +448,7 @@ async def create_admin_message(data: AdminMessage, user: dict = Depends(get_curr
     return {k: v for k, v in message_doc.items() if k != "_id"}
 
 @router.get("/admin/messages")
-async def get_admin_messages():
+async def get_admin_messages(user: dict = Depends(get_current_user)):
     messages = await db.admin_messages.find(
         {"active": True}, 
         {"_id": 0}
