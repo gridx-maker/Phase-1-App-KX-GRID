@@ -17,6 +17,11 @@ import string
 import qrcode
 from openpyxl import Workbook
 import resend
+import bcrypt
+from io import BytesIO
+from pydantic import BaseModel
+from openpyxl import load_workbook
+from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
 
 # Core configurations
 from core.database import db
@@ -25,6 +30,15 @@ from core.security import get_current_user, hash_password, verify_password, crea
 
 # Shared models
 from models import *
+
+# Email and reporting helpers
+from core.email import (
+    send_welcome_email,
+    send_email_async,
+    send_report_email,
+    generate_assessment_report_data,
+    create_university_report_excel
+)
 
 logger = logging.getLogger(__name__)
 
