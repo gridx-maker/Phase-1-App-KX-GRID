@@ -70,8 +70,16 @@ export const AuthProvider = ({ children }) => {
       headers: { 'X-Session-ID': sessionId },
       withCredentials: true
     });
-    setUser(response.data);
-    return response.data;
+    
+    // Store token and user data just like normal login
+    const { token: newToken, ...userData } = response.data;
+    if (newToken) {
+      localStorage.setItem('kotlerx_token', newToken);
+      setToken(newToken);
+    }
+    
+    setUser(userData);
+    return userData;
   };
 
   const logout = async () => {
