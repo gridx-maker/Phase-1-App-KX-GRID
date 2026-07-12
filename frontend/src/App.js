@@ -131,7 +131,7 @@ function App() {
       <BrowserRouter>
         <AuthProvider>
           <AppRouter />
-          <Toaster position="top-right" richColors />
+          <Toaster position="top-center" richColors className="!top-1/2 !-translate-y-1/2" />
         </AuthProvider>
       </BrowserRouter>
     </div>
