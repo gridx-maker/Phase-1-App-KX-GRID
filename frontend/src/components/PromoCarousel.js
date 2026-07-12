@@ -144,7 +144,7 @@ const PromoCarousel = () => {
                       data-testid={`promo-slide-${index}`}
                     >
                       <div
-                        className="relative overflow-hidden rounded-2xl cursor-pointer group h-[300px] md:h-[220px]"
+                        className="relative overflow-hidden rounded-2xl cursor-pointer group h-[340px] md:h-[260px] lg:h-[280px]"
                         onClick={() => handleBannerClick(banner)}
                         style={{
                           background: `linear-gradient(135deg, ${banner.gradient_from}20 0%, ${banner.gradient_to}20 100%)`,
@@ -165,21 +165,21 @@ const PromoCarousel = () => {
                         </div>
 
                         {/* Content - Logo RIGHT, Content LEFT */}
-                        <div className="relative z-10 flex flex-col-reverse items-center text-center p-6 md:flex-row md:justify-between md:text-left md:p-10 lg:p-12 gap-3 md:gap-8 h-full">
+                        <div className="relative z-10 flex flex-col-reverse items-center text-center py-6 px-12 md:flex-row md:justify-between md:text-left md:py-8 md:px-16 lg:py-10 lg:px-24 gap-3 md:gap-8 h-full">
                           {/* Text Content - LEFT side */}
-                          <div className="flex-1 min-w-0 flex flex-col h-full">
+                          <div className="flex-1 min-w-0 flex flex-col justify-center h-full">
                             <h3 
-                              className="font-unbounded font-bold text-lg md:text-2xl lg:text-3xl text-white mb-2 line-clamp-2"
+                              className="font-unbounded font-bold text-lg md:text-2xl lg:text-3xl text-white mb-3 line-clamp-2 leading-tight"
                               style={{ 
                                 textShadow: `0 0 30px ${banner.gradient_from}50`
                               }}
                             >
                               {banner.title}
                             </h3>
-                            <p className="text-zinc-300 text-xs md:text-sm max-w-lg mb-3 line-clamp-2">
+                            <p className="text-zinc-300 text-xs md:text-sm max-w-lg mb-6 line-clamp-2 leading-relaxed">
                               {banner.description}
                             </p>
-                            <div className="mt-auto">
+                            <div>
                             {/* CTA Button */}
                             <button
                               className="px-6 py-3 rounded-xl font-semibold text-white text-sm md:text-base flex items-center gap-2 group-hover:scale-105 transition-all duration-300 mx-auto md:mx-0"
