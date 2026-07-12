@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import KotlerXLogo from '@/components/KotlerXLogo';
 import PromoCarousel from '@/components/PromoCarousel';
+import TiltedCard from '@/components/ui/TiltedCard';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { 
@@ -465,20 +466,36 @@ const LandingPage = () => {
           ) : (
             /* Placeholder gallery when no media uploaded */
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
+              {[ 
                 { icon: Users, label: "Students", color: "from-cyan-500 to-blue-600" },
                 { icon: Award, label: "Achievements", color: "from-purple-500 to-pink-600" },
                 { icon: Smartphone, label: "NFC Tech", color: "from-orange-500 to-red-600" },
                 { icon: Star, label: "Excellence", color: "from-green-500 to-teal-600" }
               ].map((item, i) => (
-                <div 
-                  key={i}
-                  className={`aspect-square rounded-xl bg-gradient-to-br ${item.color} p-6 flex flex-col items-center justify-center text-white relative overflow-hidden group`}
-                >
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
-                  <item.icon className="w-12 h-12 mb-3 relative z-10" />
-                  <span className="font-unbounded font-semibold text-lg relative z-10">{item.label}</span>
-                  <span className="text-xs text-white/70 mt-1 relative z-10">Coming Soon</span>
+                <div key={i} className="aspect-square relative cursor-pointer group">
+                  <TiltedCard
+                    imageSrc={null}
+                    altText={item.label}
+                    captionText={item.label}
+                    containerHeight="100%"
+                    containerWidth="100%"
+                    imageHeight="100%"
+                    imageWidth="100%"
+                    rotateAmplitude={12}
+                    scaleOnHover={1.05}
+                    showMobileWarning={false}
+                    showTooltip={false}
+                    displayOverlayContent={true}
+                    cardBackgroundClassName={`bg-gradient-to-br ${item.color}`}
+                    overlayContent={
+                      <div className="flex flex-col items-center justify-center text-white p-6 w-full h-full">
+                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none rounded-[15px] z-[1]" />
+                        <item.icon className="w-12 h-12 mb-3 drop-shadow-md relative z-10" />
+                        <span className="font-unbounded font-semibold text-lg drop-shadow-md relative z-10 text-center">{item.label}</span>
+                        <span className="text-xs text-white/90 mt-1 drop-shadow-md font-medium relative z-10">Coming Soon</span>
+                      </div>
+                    }
+                  />
                 </div>
               ))}
             </div>
@@ -678,57 +695,51 @@ const LandingPage = () => {
               MESSAGE FROM <span className="gradient-text">PROGRAMME DIRECTOR</span>
             </h2>
             
-            <div className="telemetry-card rounded-2xl p-5 md:p-12">
-              <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-                {(director.photo_base64 || director.photo_url) ? (
+            <div className="relative rounded-3xl overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 opacity-50" />
+              <div className="absolute inset-0 backdrop-blur-md bg-white/[0.02] border border-white/10 rounded-3xl transition-colors group-hover:border-primary/30" />
+              
+              <div className="relative p-8 md:p-14 flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                <div className="relative flex-shrink-0">
                   <img 
-                    src={director.photo_base64 || director.photo_url}
+                    src={(director.photo_base64 || director.photo_url) ? (director.photo_base64 || director.photo_url) : "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"}
                     alt={director.name}
-                    className="w-24 h-24 md:w-40 md:h-40 rounded-xl object-cover border-2 border-primary/30 flex-shrink-0"
+                    className="relative w-32 h-32 md:w-48 md:h-48 rounded-2xl object-cover border border-white/20 z-10 group-hover:scale-105 transition-transform duration-500"
                   />
-                ) : (
-                  <div className="w-24 h-24 md:w-40 md:h-40 rounded-xl bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center flex-shrink-0">
-                    <Users className="w-12 h-12 md:w-16 md:h-16 text-white/50" />
-                  </div>
-                )}
+                </div>
                 
-                <div className="flex-1 text-center md:text-left">
-                  <div className="mb-3 md:mb-0 md:order-last">
-                    <p className="font-unbounded font-semibold text-white text-base md:text-lg">{director.name}</p>
-                    <p className="text-xs md:text-sm text-primary">{director.designation}</p>
+                <div className="flex-1 text-center md:text-left flex flex-col">
+                  <span className="text-6xl text-primary/20 font-serif leading-none absolute top-4 left-8 md:top-8 md:left-auto md:right-8">"</span>
+                  <div className="mb-6 relative z-10">
+                    <p className="font-unbounded font-bold text-white text-xl md:text-2xl tracking-wide">{director.name}</p>
+                    <p className="text-sm md:text-base text-primary/90 font-medium tracking-wide uppercase mt-1">{director.designation}</p>
+                  </div>
+                  
+                  <blockquote className="font-inter text-base md:text-lg text-zinc-300 italic leading-relaxed relative z-10 mb-8">
+                    {directorExpanded || (director.message && director.message.length <= 250) 
+                      ? `"${director.message}"`
+                      : `"${director.message?.substring(0, 250)}..."`
+                    }
+                    {director.message && director.message.length > 250 && (
+                      <button 
+                        onClick={() => setDirectorExpanded(!directorExpanded)}
+                        className="text-primary text-sm mt-3 hover:text-white transition-colors block font-semibold mx-auto md:mx-0"
+                      >
+                        {directorExpanded ? 'Read Less' : 'Read More'}
+                      </button>
+                    )}
+                  </blockquote>
+                  
+                  <div className="mt-auto relative z-10">
+                    <button
+                      onClick={() => navigate('/team')}
+                      className="inline-flex items-center gap-2 text-white bg-white/5 hover:bg-primary hover:text-black border border-white/10 hover:border-primary font-semibold py-3 px-6 rounded-xl transition-all duration-300"
+                    >
+                      MEET THE INSTRUCTORS
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
                   </div>
                 </div>
-              </div>
-              
-              {/* Director Message - Collapsible on mobile */}
-              <div className="mt-4 md:mt-6">
-                <blockquote className="font-inter text-sm md:text-base text-zinc-300 italic leading-relaxed">
-                  {directorExpanded || (director.message && director.message.length <= 200) 
-                    ? `"${director.message}"`
-                    : `"${director.message?.substring(0, 200)}..."`
-                  }
-                </blockquote>
-                {director.message && director.message.length > 200 && (
-                  <button 
-                    onClick={() => setDirectorExpanded(!directorExpanded)}
-                    className="text-primary text-xs mt-2 hover:underline"
-                    data-testid="director-read-more"
-                  >
-                    {directorExpanded ? 'Show Less' : 'Read More'}
-                  </button>
-                )}
-              </div>
-              
-              {/* Meet the Instructors Button */}
-              <div className="mt-8 text-center">
-                <button
-                  onClick={() => navigate('/team')}
-                  className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 hover:scale-105"
-                  data-testid="meet-instructors-btn"
-                >
-                  MEET THE INSTRUCTORS
-                  <ChevronRight className="w-5 h-5" />
-                </button>
               </div>
             </div>
           </div>
