@@ -433,42 +433,8 @@ async def get_gap_analysis(student_id: str, user: dict = Depends(get_current_use
     
     # Generate AI insights using Gemini
     try:
-        from emergentintegrations.llm.chat import LlmChat, UserMessage
-        
-        chat = LlmChat(
-            api_key=os.environ.get("EMERGENT_LLM_KEY"),
-            session_id=f"analysis_{student_id}_{uuid.uuid4().hex[:8]}",
-            system_message="You are an expert motorsport and automotive education trainer. Provide concise, actionable insights for student improvement."
-        ).with_model("gemini", "gemini-3-flash-preview")
-        
-        prompt = f"""Analyze this motorsport student's performance:
-Student: {student.get('full_name', 'Unknown')}
-Skill Averages (1-5 scale):
-- Skill Control: {skill_avgs['skill_control']:.1f}
-- Discipline: {skill_avgs['discipline']:.1f}
-- Safety Awareness: {skill_avgs['safety_awareness']:.1f}
-- Execution: {skill_avgs['execution']:.1f}
-- Teamwork: {skill_avgs['teamwork']:.1f}
-
-Medical conditions: {', '.join(student.get('medical_conditions', [])) or 'None'}
-
-Provide in JSON format:
-{{"insights": "2-3 sentence summary", "recommendations": ["3 specific actionable items"], "safety_flags": ["any concerns based on medical/performance"]}}"""
-        
-        response = await chat.send_message(UserMessage(text=prompt))
-        
-        import json
-        try:
-            # Try to parse JSON from response
-            json_start = response.find("{")
-            json_end = response.rfind("}") + 1
-            if json_start >= 0 and json_end > json_start:
-                ai_response = json.loads(response[json_start:json_end])
-            else:
-                ai_response = {"insights": response, "recommendations": [], "safety_flags": []}
-        except:
-            ai_response = {"insights": response, "recommendations": [], "safety_flags": []}
-        
+        # Note: emergentintegrations library is deprecated/unavailable. Using fallback insights logic.
+        raise ImportError("AI integration package not available")
     except Exception as e:
         logger.error(f"AI analysis error: {e}")
         ai_response = {
