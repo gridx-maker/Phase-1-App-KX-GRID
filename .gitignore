@@ -12,6 +12,10 @@ token.json
 .credentials
 service_account.json
 
+.claude
+a.ps1
+
+
 # ─── Python ──────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
