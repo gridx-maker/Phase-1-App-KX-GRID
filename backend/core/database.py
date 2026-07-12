@@ -101,14 +101,54 @@ def clean_doc(doc):
         return doc.isoformat()
     return doc
 
-def get_doc_id(doc: dict) -> str:
-    for k in ["_id", "user_id", "student_id", "program_id", "batch_id", "session_id", "nfc_card_id", "banner_id", "registration_id", "partner_id", "product_id", "career_id", "setting_id", "request_id", "member_id", "unit_id", "category_id", "re_class_id"]:
-        if k in doc:
-            return str(doc[k])
-    for k in doc:
-        if k.endswith("_id"):
-            return str(doc[k])
-    return str(doc.get("id") or uuid.uuid4().hex)
+COLLECTION_ID_KEYS = {
+    "users": "user_id",
+    "students": "student_id",
+    "programs": "program_id",
+    "batches": "batch_id",
+    "attendance": "attendance_id",
+    "assessments": "assessment_id",
+    "certificates": "certificate_id",
+    "team_members": "member_id",
+    "kxcraft_products": "product_id",
+    "careers": "career_id",
+    "promo_banners": "banner_id",
+    "workshop_registrations": "registration_id",
+    "partners": "partner_id",
+    "site_settings": "setting_id",
+    "callback_requests": "request_id",
+    "attendance_sessions": "session_id",
+    "assessment_categories": "category_id",
+    "admin_messages": "message_id",
+    "brands": "brand_id",
+    "media_gallery": "media_id",
+    "nfc_cards": "nfc_card_id",
+    "nfc_users": "nfc_id",
+    "program_units": "unit_id",
+    "session_attendance": "attendance_id",
+    "upgrades": "upgrade_id",
+    "leads": "lead_id"
+}
+
+def get_doc_id(doc: dict, collection_name: str = None) -> str:
+    # 1. Check for explicit _id first
+    if "_id" in doc:
+        return str(doc["_id"])
+    
+    # 2. Check for collection-specific natural key
+    if collection_name and collection_name in COLLECTION_ID_KEYS:
+        key = COLLECTION_ID_KEYS[collection_name]
+        if key in doc:
+            return str(doc[key])
+            
+    # 3. Check generic 'id'
+    if "id" in doc:
+        return str(doc["id"])
+        
+    # 4. Fallback: generate a new UUID
+    val = uuid.uuid4().hex
+    doc["_id"] = val
+    return val
 
 # ------------------------------------------------------------
 # Python-side operations wrapper for update logic
@@ -236,7 +276,7 @@ class PostgresCollection:
         return PostgresCursor(self.pool, self.name, query, projection)
 
     async def insert_one(self, doc):
-        doc_id = get_doc_id(doc)
+        doc_id = get_doc_id(doc, self.name)
         doc_copy = dict(doc)
         if "_id" not in doc_copy:
             doc_copy["_id"] = doc_id
@@ -256,7 +296,7 @@ class PostgresCollection:
         async with self.pool.acquire() as conn:
             async with conn.transaction():
                 for doc in docs:
-                    doc_id = get_doc_id(doc)
+                    doc_id = get_doc_id(doc, self.name)
                     doc_copy = dict(doc)
                     if "_id" not in doc_copy:
                         doc_copy["_id"] = doc_id
@@ -290,7 +330,7 @@ class PostgresCollection:
             elif upsert:
                 base_doc = {k: v for k, v in query.items() if not k.startswith("$")}
                 updated_data = apply_update(base_doc, update)
-                doc_id = get_doc_id(updated_data)
+                doc_id = get_doc_id(updated_data, self.name)
                 if "_id" not in updated_data:
                     updated_data["_id"] = doc_id
                 updated_data = clean_doc(updated_data)
