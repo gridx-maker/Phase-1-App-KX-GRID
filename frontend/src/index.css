@@ -302,3 +302,28 @@ body {
     display: contents !important;
   }
 }
+
+/* Center all toast popups in the middle of the screen */
+[data-sonner-toaster] {
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  bottom: auto !important;
+  right: auto !important;
+  width: 100% !important;
+  max-width: 420px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  pointer-events: none !important;
+}
+
+[data-sonner-toaster] [data-sonner-toast] {
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  border-radius: 12px !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 1px rgba(255, 255, 255, 0.1) !important;
+  pointer-events: auto !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
