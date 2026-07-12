@@ -49,15 +49,33 @@ KXGRID is a full-stack **digital operating system** for the KotlerX ecosystem. I
 Phase-1-App-KX-GRID/
 │
 ├── backend/                          # 🐍 Python FastAPI Backend
-│   ├── server.py                     # Main API server (FastAPI app, all routes)
+│   ├── server.py                     # Entry point (initializes FastAPI, CORS, DB pool, seeds, and mounts routers)
 │   ├── requirements.txt              # Python dependencies
 │   ├── migrate_cms.py                # One-off CMS data migration script
-│   ├── .env                          # Environment variables (PORT, MONGO_URL, JWT, etc.)
-│   ├── routers/                      # Modular route handlers
-│   │   ├── __init__.py               # Router exports (sms, sheets)
-│   │   ├── sms.py                    # Twilio SMS routes
-│   │   └── sheets.py                 # Google Sheets integration routes
-│   └── tests/                        # Backend pytest test suites
+│   ├── .env                          # Environment variables (PostgreSQL, JWT, Twilio, OAuth, Groq, etc.)
+│   ├── routers/                      # Modular route handlers (21 domain-specific files)
+│   │   ├── __init__.py               # Router imports & exports exports
+│   │   ├── admin.py                  # Admin dashboard & entity operations
+│   │   ├── attendance.py             # NFC attendance session management
+│   │   ├── auth.py                   # User signup, login, OAuth callbacks
+│   │   ├── brand_head.py             # Brand manager dashboard and actions
+│   │   ├── brands.py                 # Brand list, detail, visibility CRUD
+│   │   ├── careers.py                # Job listings and application flow
+│   │   ├── certificates.py           # Generation & lookup of student completion certificates (QR integrated)
+│   │   ├── cms.py                    # CMS content setup
+│   │   ├── kxcraft.py                # E-commerce product endpoints
+│   │   ├── leaderboard.py            # Global and batch leaderboard queries
+│   │   ├── leads.py                  # Capture system for closed registrations
+│   │   ├── nfc.py                    # NFC card registration, authentication, login
+│   │   ├── partners.py               # Sponsor and partner listing APIs
+│   │   ├── programs.py               # Programs, batches, and unit progress
+│   │   ├── promo.py                  # Promotional banner carousel control
+│   │   ├── sheets.py                 # Google Sheets reports sync export
+│   │   ├── sms.py                    # Twilio SMS OTP utilities
+│   │   ├── students.py               # Student onboarding & profile actions
+│   │   ├── super_admin.py            # Super Admin operations (Admin accounts & configurations)
+│   │   └── team.py                   # Team list and bulk import/export operations
+│   └── tests/                        # Backend pytest integration test suite
 │       ├── test_brands.py
 │       ├── test_cms_features.py
 │       ├── test_multimodal_auth_leads.py
@@ -286,6 +304,8 @@ graph TD
 | Twilio | SMS notifications |
 | Resend | Transactional email |
 | gspread | Google Sheets integration |
+| qrcode | QR code generation (for digital certificates) |
+| google-auth-oauthlib | Google OAuth authentication |
 | python-dotenv | Environment config |
 | uvicorn | ASGI server |
 
@@ -342,6 +362,9 @@ TWILIO_ACCOUNT_SID=
 TWILIO_AUTH_TOKEN=
 TWILIO_PHONE_NUMBER=
 SENDER_EMAIL=onboarding@resend.dev
+GOOGLE_CLIENT_ID=your_google_client_id_here
+GOOGLE_CLIENT_SECRET=your_google_client_secret_here
+GROQ_API_KEY=your_groq_api_key_here
 ```
 
 ### `frontend/.env`
@@ -403,9 +426,9 @@ Key route groups in `server.py`:
 - [x] Promotional banner carousel
 - [x] Bulk team import + JSON export
 - [x] Google Sheets integration
-- [ ] Refactor `server.py` into separate router modules
+- [x] Refactor `server.py` into separate router modules
 - [ ] Refactor `AdminPanel.js` (6500+ lines → split by domain)
-- [ ] Fix conditional occupation field in Student Registration
+- [x] Fix conditional occupation field in Student Registration
 - [ ] Push notifications
 - [ ] Crew performance analytics
 - [ ] Sponsor & Partner engine with tiers
@@ -418,7 +441,7 @@ Key route groups in `server.py`:
 > `sync_production_data.py` and `sync_production.py` have been **permanently deleted**. Their `delete_many({})` calls caused a team_members data loss incident. **Do NOT re-introduce** any destructive sync script without an explicit, audited migration plan and a confirmed backup.
 
 > [!NOTE]
-> `backend/server.py` is currently a monolithic 5700-line file. Refactoring into domain-specific router modules is a P0 task. The `backend/routers/` folder already exists for `sms.py` and `sheets.py` as examples.
+> The refactoring of `backend/server.py` into domain-specific modular router files has been successfully completed. The route handling logic has been moved to individual files in `backend/routers/` and imported dynamically in the primary FastAPI initialization server file.
 
 ---
 
