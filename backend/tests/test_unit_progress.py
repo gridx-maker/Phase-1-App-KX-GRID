@@ -61,14 +61,51 @@ class TestStudentProgressAPI:
     
     @pytest.fixture
     def student_token(self):
-        """Get student auth token"""
+        """Get student auth token and ensure profile is created"""
+        # Register user account first
+        requests.post(f"{BASE_URL}/api/auth/register", json={
+            "email": STUDENT_EMAIL,
+            "password": STUDENT_PASSWORD,
+            "name": "Regular Student",
+            "role": "student"
+        })
+        
+        # Login
         response = requests.post(f"{BASE_URL}/api/auth/login", json={
             "email": STUDENT_EMAIL,
             "password": STUDENT_PASSWORD
         })
-        if response.status_code == 200:
-            return response.json().get("token")
-        pytest.skip("Student authentication failed")
+        if response.status_code != 200:
+            pytest.skip("Student authentication failed")
+        
+        data = response.json()
+        token = data.get("token")
+        user_id = data.get("user_id")
+        
+        headers = {"Authorization": f"Bearer {token}"}
+        
+        # Check if student profile is registered
+        profile_resp = requests.get(f"{BASE_URL}/api/students/profile", headers=headers)
+        if profile_resp.status_code == 200 and not profile_resp.json().get("registered"):
+            # Register student profile
+            requests.post(f"{BASE_URL}/api/students/register", json={
+                "user_id": user_id,
+                "full_name": "Regular Student",
+                "mobile": "+918072771641",
+                "age": 21,
+                "blood_group": "O+",
+                "address": "123 Kotler Street",
+                "city": "Chennai",
+                "state": "Tamil Nadu",
+                "emergency_contact": "+918072771641",
+                "highest_degree": "B.Tech Motorsport",
+                "occupation_type": "student",
+                "occupation_detail": "Kotler University",
+                "medical_conditions": ["None"],
+                "blood_donation_willing": False
+            }, headers=headers)
+            
+        return token
     
     @pytest.fixture
     def admin_token(self):
