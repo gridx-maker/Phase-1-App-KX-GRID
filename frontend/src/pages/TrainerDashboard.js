@@ -1,3 +1,4 @@
+import SplitText from '@/components/ui/SplitText';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
@@ -135,7 +136,7 @@ const TrainerDashboard = () => {
           <div className="flex items-center gap-4">
             <KotlerXLogo size="md" variant="header" />
             <div>
-              <h1 className="font-unbounded font-bold text-xl text-white">Trainer Dashboard</h1>
+              <SplitText text="Trainer Dashboard" tag="h1" className="font-unbounded font-bold text-xl text-white" />
               <p className="text-sm text-zinc-500">Welcome, {user?.name}</p>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import SplitText from '@/components/ui/SplitText';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -173,9 +174,11 @@ const StudentDashboard = () => {
         <header className="sticky top-0 z-40 glass border-b border-white/5">
           <div className="px-6 py-4 flex items-center justify-between">
             <div>
-              <h1 className="font-unbounded font-bold text-xl text-white">
-                Welcome back, {student?.full_name?.split(' ')[0] || user?.name}
-              </h1>
+              <SplitText 
+                text={`Welcome back, ${student?.full_name?.split(' ')[0] || user?.name}`} 
+                tag="h1" 
+                className="font-unbounded font-bold text-xl text-white" 
+              />
               <p className="text-sm text-zinc-500 font-inter">Track your progress and achievements</p>
             </div>
             
