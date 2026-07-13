@@ -1,3 +1,4 @@
+import SplitText from '@/components/ui/SplitText';
 import React, { useState } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
@@ -209,7 +210,7 @@ const LoginPage = () => {
             <span className={`font-inter font-medium ${currentRole.color}`}>{currentRole.title}</span>
           </div>
 
-          <h1 className="font-unbounded font-bold text-3xl text-white mb-2">Welcome Back</h1>
+          <SplitText text="Welcome Back" tag="h1" className="font-unbounded font-bold text-3xl text-white mb-2" />
           <p className="font-inter text-zinc-400 mb-8">{currentRole.subtitle}</p>
 
           {/* Login Tabs */}
