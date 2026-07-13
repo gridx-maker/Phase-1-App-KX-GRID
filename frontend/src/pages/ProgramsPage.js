@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import SplitText from '@/components/ui/SplitText';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -12,14 +13,15 @@ import { toast } from 'sonner';
 import { 
   Calendar, Clock, Users, CheckCircle2, ChevronRight,
   Award, Zap, CreditCard, Landmark, MapPin, Phone, User,
-  Loader2, LogIn, Smartphone, Lock, CalendarDays
+  Loader2, LogIn, Smartphone, Lock, CalendarDays,
+  GraduationCap, Medal, Trophy
 } from 'lucide-react';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const ProgramsPage = () => {
   const navigate = useNavigate();
-  const { user, isAuthenticated, token } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const [programs, setPrograms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [registerOpen, setRegisterOpen] = useState(false);
@@ -60,11 +62,9 @@ const ProgramsPage = () => {
 
     setSubmitting(true);
     try {
-      // Check if NFC card exists
       const response = await axios.get(`${API}/students/nfc/${nfcId.toUpperCase()}`);
       if (response.data) {
         toast.success(`Welcome back, ${response.data.full_name}!`);
-        // Redirect to ID card view or dashboard
         navigate(`/id/${nfcId.toUpperCase()}`);
       }
     } catch (error) {
@@ -110,7 +110,7 @@ const ProgramsPage = () => {
       program_id: 'cert_racing',
       name: 'Racing Fundamentals',
       program_type: 'certification',
-      description: 'Master the basics of motorsport racing techniques and safety protocols',
+      description: 'Master the basics of motorsport racing techniques and safety protocols.',
       duration_weeks: 4,
       batch_size: 20,
       highlights: ['Track basics & safety', 'Vehicle handling', 'Race etiquette', 'Certification exam']
@@ -119,7 +119,7 @@ const ProgramsPage = () => {
       program_id: 'diploma_pro',
       name: 'Professional Racing',
       program_type: 'diploma',
-      description: 'Advanced training program for competitive racing careers',
+      description: 'Advanced training program for competitive racing careers.',
       duration_weeks: 12,
       batch_size: 15,
       highlights: ['Advanced techniques', 'Race strategy', 'Pit crew training', 'Media handling']
@@ -128,7 +128,7 @@ const ProgramsPage = () => {
       program_id: 'pg_mgmt',
       name: 'Motorsport Management',
       program_type: 'pg_diploma',
-      description: 'Complete motorsport industry expertise with placement support',
+      description: 'Complete motorsport industry expertise with placement support.',
       duration_weeks: 24,
       batch_size: 10,
       highlights: ['Team management', 'Event coordination', 'Sponsorship deals', 'Industry placement']
@@ -137,56 +137,63 @@ const ProgramsPage = () => {
 
   const displayPrograms = programs.length > 0 ? programs : defaultPrograms;
 
-  const getProgramStyle = (type) => {
+  const getProgramIcon = (type) => {
+    let src = '';
+    let alt = '';
     switch (type) {
       case 'certification':
-        return { gradient: 'from-cyan-500 to-blue-600', badge: 'bg-cyan-500/20 text-cyan-400', icon: '🏁' };
+        src = '/assets/biker.png';
+        alt = 'Biker';
+        break;
       case 'diploma':
-        return { gradient: 'from-purple-500 to-pink-600', badge: 'bg-purple-500/20 text-purple-400', icon: '🏆' };
+        src = '/assets/racer.png';
+        alt = 'Racer';
+        break;
       case 'pg_diploma':
-        return { gradient: 'from-orange-500 to-red-600', badge: 'bg-orange-500/20 text-orange-400', icon: '👑' };
+        src = '/assets/wheel.png';
+        alt = 'Steering Wheel';
+        break;
       default:
-        return { gradient: 'from-gray-500 to-gray-600', badge: 'bg-gray-500/20 text-gray-400', icon: '📚' };
+        src = '/assets/biker.png';
+        alt = 'Biker';
     }
+    return (
+      <img
+        src={src}
+        alt={alt}
+        className="w-12 h-12 object-contain transition-transform duration-300 hover:scale-125"
+      />
+    );
   };
 
+  const filterOptions = [
+    { key: 'all', label: 'All Programs', count: displayPrograms.length },
+    { key: 'certification', label: 'Certificate', count: displayPrograms.filter(p => p.program_type === 'certification').length },
+    { key: 'diploma', label: 'Diploma', count: displayPrograms.filter(p => p.program_type === 'diploma').length },
+    { key: 'pg_diploma', label: 'PG Diploma', count: displayPrograms.filter(p => p.program_type === 'pg_diploma').length }
+  ];
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background font-inter">
       {/* Header */}
-      <header className="sticky top-0 z-50 glass border-b border-white/5">
+      <header className="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-white/10">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4 cursor-pointer" onClick={() => navigate('/')}>
             <KotlerXLogo size="md" variant="header" />
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             {isAuthenticated ? (
-              <Button
-                onClick={() => navigate('/dashboard')}
-                className="btn-primary gap-2"
-                data-testid="go-dashboard-btn"
-              >
+              <Button onClick={() => navigate('/dashboard')} className="bg-[#00e5ff] text-black hover:bg-[#00e5ff]/90 font-semibold" data-testid="go-dashboard-btn">
                 Dashboard
-                <ChevronRight className="w-4 h-4" />
               </Button>
             ) : (
               <>
-                <Button
-                  onClick={() => setNfcLoginOpen(true)}
-                  variant="outline"
-                  className="border-white/10 text-white hover:bg-white/5 gap-2"
-                  data-testid="nfc-login-btn"
-                >
-                  <Smartphone className="w-4 h-4" />
+                <Button onClick={() => setNfcLoginOpen(true)} variant="outline" className="border-white/10 text-white hover:border-[#00e5ff] hover:text-[#00e5ff] hover:bg-transparent" data-testid="nfc-login-btn">
+                  <Smartphone className="w-4 h-4 mr-2" />
                   NFC Login
                 </Button>
-                <Button
-                  onClick={() => navigate('/login')}
-                  variant="ghost"
-                  className="text-zinc-400 hover:text-white"
-                  data-testid="login-btn"
-                >
-                  <LogIn className="w-4 h-4 mr-2" />
+                <Button onClick={() => navigate('/login')} variant="ghost" className="text-zinc-300 hover:text-[#00e5ff] hover:bg-transparent" data-testid="login-btn">
                   Login
                 </Button>
               </>
@@ -196,46 +203,35 @@ const ProgramsPage = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="py-8 md:py-16 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-secondary/10 to-transparent" />
-        <div className="max-w-6xl mx-auto px-4 md:px-6 text-center relative z-10">
-          <h1 className="font-unbounded font-bold text-2xl md:text-4xl lg:text-5xl text-white mb-3">
-            OUR <span className="gradient-text">PROGRAMS</span>
-          </h1>
-          <p className="font-inter text-zinc-400 text-sm md:text-base max-w-2xl mx-auto">
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <SplitText 
+            text="OUR PROGRAMS" 
+            tag="h1" 
+            className="font-unbounded font-bold text-3xl md:text-5xl text-white mb-4" 
+          />
+          <p className="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto">
             Choose your path to motorsport excellence. From certification to post-graduate diploma, 
             we have the perfect program for every aspiring professional.
           </p>
         </div>
       </section>
 
-      {/* Program Type Filter Tiles */}
-      <section className="py-6 md:py-8 border-y border-white/5 bg-surface/50 sticky top-[65px] z-40">
-        <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-4 gap-2 md:gap-4">
-            {[
-              { key: 'all', label: 'All', icon: Award, gradient: 'from-white/10 to-white/5', activeGradient: 'from-primary/30 to-cyan-500/20', borderColor: 'border-primary', color: 'text-primary', count: displayPrograms.length },
-              { key: 'certification', label: 'Certificate', icon: Zap, gradient: 'from-cyan-500/10 to-blue-500/5', activeGradient: 'from-cyan-500/30 to-blue-600/20', borderColor: 'border-cyan-400', color: 'text-cyan-400', count: displayPrograms.filter(p => p.program_type === 'certification').length },
-              { key: 'diploma', label: 'Diploma', icon: Award, gradient: 'from-purple-500/10 to-pink-500/5', activeGradient: 'from-purple-500/30 to-pink-600/20', borderColor: 'border-purple-400', color: 'text-purple-400', count: displayPrograms.filter(p => p.program_type === 'diploma').length },
-              { key: 'pg_diploma', label: 'PG Diploma', icon: Calendar, gradient: 'from-orange-500/10 to-red-500/5', activeGradient: 'from-orange-500/30 to-red-600/20', borderColor: 'border-orange-400', color: 'text-orange-400', count: displayPrograms.filter(p => p.program_type === 'pg_diploma').length }
-            ].map((item) => (
+      {/* Modern Pill Filters */}
+      <section className="pb-8">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {filterOptions.map((item) => (
               <button
                 key={item.key}
                 onClick={() => setActiveFilter(item.key)}
-                className={`flex flex-col items-center justify-center aspect-square rounded-xl border-2 transition-all duration-200 bg-gradient-to-br ${
+                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-colors border ${
                   activeFilter === item.key
-                    ? `${item.activeGradient} ${item.borderColor} shadow-lg`
-                    : `${item.gradient} border-white/10 hover:border-white/20`
+                    ? 'bg-white text-black border-white'
+                    : 'bg-transparent text-zinc-400 border-white/10 hover:border-white/30 hover:text-white'
                 }`}
-                data-testid={`filter-${item.key}`}
               >
-                <item.icon className={`w-5 h-5 md:w-6 md:h-6 mb-1 ${activeFilter === item.key ? item.color : 'text-zinc-500'}`} />
-                <span className={`text-[11px] md:text-sm font-bold leading-tight text-center ${activeFilter === item.key ? 'text-white' : 'text-zinc-400'}`}>
-                  {item.label}
-                </span>
-                <span className={`text-[9px] md:text-xs mt-0.5 ${activeFilter === item.key ? item.color : 'text-zinc-600'}`}>
-                  {item.count}
-                </span>
+                {item.label} <span className="opacity-60 ml-1">({item.count})</span>
               </button>
             ))}
           </div>
@@ -243,326 +239,275 @@ const ProgramsPage = () => {
       </section>
 
       {/* Programs Grid */}
-      <section className="py-8 md:py-16">
-        <div className="max-w-6xl mx-auto px-4 md:px-6">
+      <section className="py-8 md:py-12 pb-24">
+        <div className="max-w-6xl mx-auto px-6">
           {loading ? (
-            <div className="text-center py-12">
-              <Loader2 className="w-12 h-12 text-primary animate-spin mx-auto" />
+            <div className="flex justify-center py-20">
+              <Loader2 className="w-8 h-8 text-primary animate-spin" />
             </div>
           ) : (
-            <>
-              {/* Active filter label */}
-              <p className="text-zinc-500 text-sm mb-4 md:mb-6">
-                Showing {activeFilter === 'all' ? 'all programs' : activeFilter.replace('_', ' ') + ' programs'} 
-                ({(activeFilter === 'all' ? displayPrograms : displayPrograms.filter(p => p.program_type === activeFilter)).length})
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {(activeFilter === 'all' ? displayPrograms : displayPrograms.filter(p => p.program_type === activeFilter)).map((program) => {
-                const style = getProgramStyle(program.program_type);
                 return (
                   <div
                     key={program.program_id}
-                    className="telemetry-card rounded-2xl overflow-hidden group hover:border-primary/30 transition-all"
+                    className="flex flex-col bg-surface border border-white/10 rounded-2xl overflow-hidden hover:border-white/20 hover:bg-white/[0.02] transition-all"
                   >
-                    {/* Header */}
-                    <div className={`h-28 md:h-36 bg-gradient-to-br ${style.gradient} relative p-4 md:p-6`}>
-                      <div className="absolute inset-0 bg-black/30" />
-                      <div className="relative z-10 h-full flex flex-col justify-between">
-                        <div className="flex items-center justify-between">
-                          <span className="text-2xl md:text-3xl">{style.icon}</span>
-                          <span className={`px-2 md:px-3 py-1 rounded-full text-[10px] md:text-xs font-mono uppercase ${style.badge}`}>
-                            {program.program_type?.replace('_', ' ')}
-                          </span>
+                    <div className="p-6 md:p-8 flex-1">
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center text-zinc-300 overflow-visible">
+                          {getProgramIcon(program.program_type)}
                         </div>
-                        <h3 className="font-unbounded font-bold text-base md:text-xl text-white leading-tight">{program.name}</h3>
+                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-zinc-300 capitalize">
+                          {program.program_type?.replace('_', ' ')}
+                        </span>
                       </div>
-                    </div>
-
-                    {/* Content */}
-                    <div className="p-4 md:p-6">
-                      <p className="text-xs md:text-sm text-zinc-400 mb-3 md:mb-4 line-clamp-2">
+                      
+                      <h3 className="font-unbounded font-semibold text-xl text-[#00e5ff] mb-3">
+                        {program.name}
+                      </h3>
+                      <p className="text-sm text-zinc-400 mb-6 line-clamp-3">
                         {program.description}
                       </p>
 
-                      <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-5 text-xs md:text-sm">
+                      <div className="flex items-center gap-4 text-sm text-zinc-300 mb-6">
                         {program.duration_weeks && (
-                          <div className="flex items-center gap-1 text-zinc-500">
-                            <Clock className="w-3 h-3 md:w-4 md:h-4" />
-                            <span>{program.duration_weeks} weeks</span>
+                          <div className="flex items-center gap-1.5">
+                            <Clock className="w-4 h-4 text-zinc-500" />
+                            <span>{program.duration_weeks} wks</span>
                           </div>
                         )}
                         {program.batch_size && (
-                          <div className="flex items-center gap-1 text-zinc-500">
-                            <Users className="w-3 h-3 md:w-4 md:h-4" />
-                            <span>Batch: {program.batch_size}</span>
+                          <div className="flex items-center gap-1.5">
+                            <Users className="w-4 h-4 text-zinc-500" />
+                            <span>{program.batch_size} seats</span>
                           </div>
                         )}
                       </div>
 
-                      {/* Highlights */}
-                      <div className="space-y-1.5 md:space-y-2 mb-4 md:mb-6">
-                        <p className="text-[10px] md:text-xs text-zinc-500 font-mono uppercase">Highlights</p>
+                      <div className="space-y-3 mb-8">
                         {(program.highlights || []).slice(0, 4).map((item, i) => (
-                          <div key={i} className="flex items-start gap-2 text-xs md:text-sm text-zinc-300">
-                            <CheckCircle2 className="w-3 h-3 md:w-4 md:h-4 text-primary flex-shrink-0 mt-0.5" />
+                          <div key={i} className="flex items-start gap-3 text-sm text-zinc-400">
+                            <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5 opacity-80" />
                             <span className="leading-tight">{item}</span>
                           </div>
                         ))}
                       </div>
+                    </div>
 
+                    <div className="p-6 pt-0 mt-auto">
                       <Button
                         onClick={() => openRegisterDialog(program)}
-                        className={`w-full gap-2 h-10 md:h-11 text-sm ${
+                        variant={program.registration_open === false ? "secondary" : "default"}
+                        className={`w-full font-medium h-12 ${
                           program.registration_open === false 
-                            ? 'bg-secondary text-black hover:bg-secondary/90' 
-                            : 'btn-primary'
+                            ? 'bg-white/10 text-white hover:bg-#00e5ff' 
+                            : 'bg-white text-black hover:bg-zinc-200'
                         }`}
-                        data-testid={`register-${program.program_id}`}
                       >
                         {program.registration_open === false ? (
                           <>
-                            <CalendarDays className="w-4 h-4" />
+                            <CalendarDays className="w-4 h-4 mr-2" />
                             {program.next_batch_date 
                               ? `Next Batch: ${new Date(program.next_batch_date).toLocaleDateString()}` 
                               : 'Join Waitlist'
                             }
                           </>
                         ) : (
-                          <>
-                            Register Interest
-                            <ChevronRight className="w-4 h-4" />
-                          </>
+                          'Register Interest'
                         )}
                       </Button>
-                      {program.registration_open === false && (
-                        <p className="text-[10px] md:text-xs text-center text-zinc-500 mt-2">
-                          <Lock className="w-3 h-3 inline mr-1" />
-                          Reserve your spot for the next batch
-                        </p>
-                      )}
                     </div>
                   </div>
                 );
               })}
-              </div>
-              
-              {/* Empty state */}
-              {(activeFilter !== 'all' && displayPrograms.filter(p => p.program_type === activeFilter).length === 0) && (
-                <div className="text-center py-12">
-                  <p className="text-zinc-500">No {activeFilter.replace('_', ' ')} programs available yet.</p>
-                </div>
-              )}
-            </>
+            </div>
+          )}
+          
+          {!loading && activeFilter !== 'all' && displayPrograms.filter(p => p.program_type === activeFilter).length === 0 && (
+            <div className="text-center py-20">
+              <p className="text-zinc-500">No {activeFilter.replace('_', ' ')} programs available at the moment.</p>
+            </div>
           )}
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-surface border-t border-white/5">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="font-unbounded font-bold text-3xl text-white mb-4">
+      <section className="py-20 bg-surface border-t border-white/5">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <h2 className="font-unbounded font-semibold text-2xl md:text-3xl text-white mb-4">
             Already a Student?
           </h2>
           <p className="text-zinc-400 mb-8">
-            Tap your NFC card or enter your NFC ID to access your dashboard
+            Tap your NFC card or enter your NFC ID to access your dashboard.
           </p>
           <Button
             onClick={() => setNfcLoginOpen(true)}
-            className="btn-primary h-14 px-10 text-lg gap-3"
-            data-testid="nfc-login-cta-btn"
+            className="bg-primary text-black hover:bg-primary/90 h-14 px-8 text-base font-medium"
           >
-            <Smartphone className="w-6 h-6" />
+            <Smartphone className="w-5 h-5 mr-2" />
             Login with NFC Card
           </Button>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t border-white/5">
+      <footer className="py-12 border-t border-white/5">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <KotlerXLogo size="sm" className="justify-center mb-4" />
+          <KotlerXLogo size="sm" className="justify-center mb-6 opacity-50 hover:opacity-100 transition-opacity" />
           <p className="text-sm text-zinc-500">
             India's First NFC + AI Skill Platform for Motorsport Education
           </p>
         </div>
       </footer>
 
-      {/* NFC Login Dialog */}
+      {/* Dialogs... (NFC Login & Registration kept same logic, just cleaner UI) */}
       <Dialog open={nfcLoginOpen} onOpenChange={setNfcLoginOpen}>
-        <DialogContent className="bg-surface border-white/10 max-w-md">
+        <DialogContent className="bg-surface border-white/10 max-w-sm">
           <DialogHeader>
             <DialogTitle className="font-unbounded text-white flex items-center gap-3">
-              <Smartphone className="w-6 h-6 text-primary" />
+              <Smartphone className="w-5 h-5" />
               NFC Login
             </DialogTitle>
           </DialogHeader>
 
-          <div className="space-y-6 py-4">
-            <p className="text-zinc-400 text-sm">
-              Enter your NFC Card ID to access your student profile
-            </p>
-
+          <div className="space-y-6 pt-4">
             <div className="space-y-2">
-              <Label className="text-zinc-400">NFC Card ID</Label>
+              <Label className="text-zinc-400">Card ID</Label>
               <Input
                 value={nfcId}
                 onChange={(e) => setNfcId(e.target.value.toUpperCase())}
-                className="input-dark h-14 font-mono text-center text-xl tracking-widest"
+                className="bg-black/50 border-white/10 h-12 font-mono text-center tracking-widest text-white"
                 placeholder="NFC_XXXXXXXX"
-                data-testid="nfc-id-input"
               />
             </div>
-
             <Button
               onClick={handleNFCLogin}
               disabled={submitting || !nfcId}
-              className="w-full h-12 btn-primary"
-              data-testid="nfc-login-submit-btn"
+              className="w-full h-12 bg-white text-black hover:bg-zinc-200"
             >
-              {submitting ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Access My Profile'}
+              {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Access Profile'}
             </Button>
-
-            <p className="text-xs text-zinc-500 text-center">
-              Don't have an NFC card? <button onClick={() => { setNfcLoginOpen(false); setRegisterOpen(true); }} className="text-primary hover:underline">Register for a program</button>
+            <p className="text-sm text-zinc-500 text-center">
+              Don't have a card? <button onClick={() => { setNfcLoginOpen(false); setRegisterOpen(true); }} className="text-white hover:underline">Register here</button>
             </p>
           </div>
         </DialogContent>
       </Dialog>
 
-      {/* Lead Registration Dialog */}
       <Dialog open={registerOpen} onOpenChange={setRegisterOpen}>
         <DialogContent className="bg-surface border-white/10 max-w-md">
           <DialogHeader>
             <DialogTitle className="font-unbounded text-white">
-              {selectedProgram?.registration_open === false ? 'Join Waitlist for Next Batch' : 'Register Interest'}
+              {selectedProgram?.registration_open === false ? 'Join Waitlist' : 'Register Interest'}
             </DialogTitle>
           </DialogHeader>
 
-          <div className="space-y-4 py-4">
+          <div className="space-y-4 pt-4">
             {selectedProgram && (
-              <div className={`p-4 rounded-lg border mb-4 ${
-                selectedProgram.registration_open === false 
-                  ? 'bg-secondary/10 border-secondary/30' 
-                  : 'bg-primary/10 border-primary/30'
-              }`}>
-                <p className={`text-xs font-mono uppercase mb-1 ${
-                  selectedProgram.registration_open === false ? 'text-secondary' : 'text-primary'
-                }`}>
-                  {selectedProgram.registration_open === false ? 'Next Batch' : 'Selected Program'}
+              <div className="p-4 rounded-xl border border-white/10 bg-black/20 mb-2">
+                <p className="text-xs text-zinc-500 uppercase mb-1">
+                  {selectedProgram.registration_open === false ? 'Waitlist For' : 'Selected Program'}
                 </p>
-                <p className="text-white font-semibold">{selectedProgram.name}</p>
-                {selectedProgram.registration_open === false && selectedProgram.next_batch_date && (
-                  <p className="text-sm text-secondary mt-1">
-                    <CalendarDays className="w-4 h-4 inline mr-1" />
-                    Starting: {new Date(selectedProgram.next_batch_date).toLocaleDateString()}
-                  </p>
-                )}
+                <p className="text-white font-medium">{selectedProgram.name}</p>
               </div>
             )}
 
-            <div className="space-y-2">
-              <Label className="text-zinc-400">Full Name *</Label>
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
-                <Input
-                  value={leadForm.name}
-                  onChange={(e) => setLeadForm({ ...leadForm, name: e.target.value })}
-                  className="input-dark h-12 pl-11"
-                  placeholder="Enter your name"
-                  data-testid="lead-name-input"
-                />
+            <div className="space-y-4">
+              <div className="space-y-1.5">
+                <Label className="text-zinc-400 text-xs">Full Name</Label>
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+                  <Input
+                    value={leadForm.name}
+                    onChange={(e) => setLeadForm({ ...leadForm, name: e.target.value })}
+                    className="bg-black/50 border-white/10 h-11 pl-10 text-white"
+                    placeholder="Enter your name"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="space-y-2">
-              <Label className="text-zinc-400">Location (City) *</Label>
-              <div className="relative">
-                <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
-                <Input
-                  value={leadForm.location}
-                  onChange={(e) => setLeadForm({ ...leadForm, location: e.target.value })}
-                  className="input-dark h-12 pl-11"
-                  placeholder="Enter your city"
-                  data-testid="lead-location-input"
-                />
+              <div className="space-y-1.5">
+                <Label className="text-zinc-400 text-xs">Location</Label>
+                <div className="relative">
+                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+                  <Input
+                    value={leadForm.location}
+                    onChange={(e) => setLeadForm({ ...leadForm, location: e.target.value })}
+                    className="bg-black/50 border-white/10 h-11 pl-10 text-white"
+                    placeholder="Enter your city"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="space-y-2">
-              <Label className="text-zinc-400">Mobile Number *</Label>
-              <div className="relative">
-                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
-                <Input
-                  value={leadForm.mobile}
-                  onChange={(e) => setLeadForm({ ...leadForm, mobile: e.target.value.replace(/\D/g, '').slice(0, 10) })}
-                  className="input-dark h-12 pl-11"
-                  placeholder="Enter mobile number"
-                  data-testid="lead-mobile-input"
-                />
+              <div className="space-y-1.5">
+                <Label className="text-zinc-400 text-xs">Mobile Number</Label>
+                <div className="relative">
+                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+                  <Input
+                    value={leadForm.mobile}
+                    onChange={(e) => setLeadForm({ ...leadForm, mobile: e.target.value.replace(/\D/g, '').slice(0, 10) })}
+                    className="bg-black/50 border-white/10 h-11 pl-10 text-white"
+                    placeholder="Enter mobile number"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="space-y-2">
-              <Label className="text-zinc-400">Program Interest *</Label>
-              <Select
-                value={leadForm.program_interest}
-                onValueChange={(v) => setLeadForm({ ...leadForm, program_interest: v })}
-              >
-                <SelectTrigger className="input-dark h-12" data-testid="lead-program-select">
-                  <SelectValue placeholder="Select program" />
-                </SelectTrigger>
-                <SelectContent className="bg-surface border-white/10">
-                  {displayPrograms.map(p => (
-                    <SelectItem key={p.program_id} value={p.name}>{p.name}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label className="text-zinc-400">Fee Payment Type *</Label>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setLeadForm({ ...leadForm, fee_type: 'cash' })}
-                  className={`flex items-center justify-center gap-2 p-4 rounded-lg border transition-all ${
-                    leadForm.fee_type === 'cash'
-                      ? 'border-primary bg-primary/10 text-primary'
-                      : 'border-white/10 text-zinc-400 hover:border-white/20'
-                  }`}
-                  data-testid="fee-cash-btn"
+              <div className="space-y-1.5">
+                <Label className="text-zinc-400 text-xs">Program Interest</Label>
+                <Select
+                  value={leadForm.program_interest}
+                  onValueChange={(v) => setLeadForm({ ...leadForm, program_interest: v })}
                 >
-                  <CreditCard className="w-5 h-5" />
-                  <span>Cash</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setLeadForm({ ...leadForm, fee_type: 'loan' })}
-                  className={`flex items-center justify-center gap-2 p-4 rounded-lg border transition-all ${
-                    leadForm.fee_type === 'loan'
-                      ? 'border-primary bg-primary/10 text-primary'
-                      : 'border-white/10 text-zinc-400 hover:border-white/20'
-                  }`}
-                  data-testid="fee-loan-btn"
-                >
-                  <Landmark className="w-5 h-5" />
-                  <span>Loan</span>
-                </button>
+                  <SelectTrigger className="bg-black/50 border-white/10 h-11 text-white">
+                    <SelectValue placeholder="Select program" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-surface border-white/10">
+                    {displayPrograms.map(p => (
+                      <SelectItem key={p.program_id} value={p.name}>{p.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-1.5">
+                <Label className="text-zinc-400 text-xs">Payment Preference</Label>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setLeadForm({ ...leadForm, fee_type: 'cash' })}
+                    className={`flex items-center justify-center gap-2 py-3 rounded-lg border text-sm transition-colors ${
+                      leadForm.fee_type === 'cash'
+                        ? 'bg-white text-black border-white'
+                        : 'bg-black/50 border-white/10 text-zinc-400 hover:border-white/30'
+                    }`}
+                  >
+                    <CreditCard className="w-4 h-4" />
+                    Cash
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLeadForm({ ...leadForm, fee_type: 'loan' })}
+                    className={`flex items-center justify-center gap-2 py-3 rounded-lg border text-sm transition-colors ${
+                      leadForm.fee_type === 'loan'
+                        ? 'bg-white text-black border-white'
+                        : 'bg-black/50 border-white/10 text-zinc-400 hover:border-white/30'
+                    }`}
+                  >
+                    <Landmark className="w-4 h-4" />
+                    Loan
+                  </button>
+                </div>
               </div>
             </div>
 
             <Button
               onClick={handleLeadSubmit}
               disabled={submitting || !leadForm.name || !leadForm.mobile || !leadForm.program_interest || !leadForm.fee_type}
-              className="w-full h-12 btn-primary mt-4"
-              data-testid="submit-lead-btn"
+              className="w-full h-12 bg-white text-black hover:bg-zinc-200 mt-2"
             >
-              {submitting ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Submit Registration'}
+              {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Submit Details'}
             </Button>
-
-            <p className="text-xs text-zinc-500 text-center">
-              Our team will contact you within 24 hours
-            </p>
           </div>
         </DialogContent>
       </Dialog>
