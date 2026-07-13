@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import SplitText from '@/components/ui/SplitText';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -183,17 +184,19 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <KotlerXLogo size="md" variant="header" />
+          <div className="flex items-center">
+            <KotlerXLogo size="md" variant="header" />
+          </div>
           
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-zinc-400 hover:text-white transition-colors font-inter text-sm">Features</a>
-            <a href="#programs" className="text-zinc-400 hover:text-white transition-colors font-inter text-sm">Programs</a>
+            <a href="#features" className="text-zinc-300 hover:text-[#00e5ff] transition-colors font-inter text-sm font-medium">Features</a>
+            <a href="#programs" className="text-zinc-300 hover:text-[#00e5ff] transition-colors font-inter text-sm font-medium">Programs</a>
             <Button 
               onClick={() => navigate('/programs')}
-              className="btn-primary px-6"
+              className="bg-[#00e5ff] text-black hover:bg-[#00e5ff]/90 px-6 font-semibold transition-all"
               data-testid="nav-programs-btn"
             >
               View Programs
@@ -214,12 +217,12 @@ const LandingPage = () => {
 
         {/* Mobile Menu Dropdown */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-background/95 backdrop-blur-xl border-t border-white/5 py-4 px-6 space-y-4">
-            <a href="#features" className="block text-zinc-300 hover:text-white transition-colors font-inter" onClick={() => setMobileMenuOpen(false)}>Features</a>
-            <a href="#programs" className="block text-zinc-300 hover:text-white transition-colors font-inter" onClick={() => setMobileMenuOpen(false)}>Programs</a>
+          <div className="md:hidden bg-zinc-950 border-t border-white/10 py-4 px-6 space-y-4 shadow-lg">
+            <a href="#features" className="block text-zinc-300 hover:text-[#00e5ff] transition-colors font-inter font-medium" onClick={() => setMobileMenuOpen(false)}>Features</a>
+            <a href="#programs" className="block text-zinc-300 hover:text-[#00e5ff] transition-colors font-inter font-medium" onClick={() => setMobileMenuOpen(false)}>Programs</a>
             <Button 
               onClick={() => { navigate('/programs'); setMobileMenuOpen(false); }}
-              className="btn-primary w-full"
+              className="bg-[#00e5ff] text-black hover:bg-[#00e5ff]/90 w-full font-semibold"
             >
               View Programs
             </Button>
@@ -227,14 +230,14 @@ const LandingPage = () => {
               <Button 
                 variant="outline"
                 onClick={() => { navigate('/login/student'); setMobileMenuOpen(false); }}
-                className="w-full border-zinc-700 text-zinc-300"
+                className="w-full border-white/10 text-white hover:border-[#00e5ff] hover:text-[#00e5ff]"
               >
                 Student Login
               </Button>
               <Button 
                 variant="outline"
                 onClick={() => { navigate('/login/office'); setMobileMenuOpen(false); }}
-                className="w-full border-zinc-700 text-zinc-300"
+                className="w-full border-white/10 text-white hover:border-[#00e5ff] hover:text-[#00e5ff]"
               >
                 Office Login
               </Button>
@@ -251,14 +254,11 @@ const LandingPage = () => {
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
           {/* Main Tagline - Proper spacing */}
-          <h1 className="font-unbounded font-black text-3xl md:text-5xl lg:text-6xl tracking-tight mb-8 animate-slide-up">
-            <span className="text-white">LEARN</span>
-            <span className="text-primary">.</span>
-            <span className="text-white"> EXECUTE</span>
-            <span className="text-primary">.</span>
-            <span className="text-white"> LEAD</span>
-            <span className="text-primary">.</span>
-          </h1>
+          <SplitText 
+            text="LEARN. EXECUTE. LEAD." 
+            tag="h1" 
+            className="font-unbounded font-black text-3xl md:text-5xl lg:text-6xl tracking-tight mb-8 animate-slide-up text-white" 
+          />
           
           {/* Hero Logo with Purple Glow */}
           <div className="animate-slide-up flex justify-center mb-8" style={{ animationDelay: '0.1s' }}>
@@ -329,9 +329,11 @@ const LandingPage = () => {
       <section id="features" className="py-32 relative">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4">
-              UNIFIED <span className="text-primary">PLATFORM</span>
-            </h2>
+            <SplitText 
+              text="UNIFIED PLATFORM" 
+              tag="h2" 
+              className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4" 
+            />
             <p className="font-inter text-zinc-400 max-w-xl mx-auto">
               One platform connecting all operations, departments, and stakeholders
             </p>
