@@ -1,4 +1,5 @@
 @echo off
+setlocal EnableDelayedExpansion
 REM ========================================================================
 REM  KXGRID - Start All Servers
 REM  Starts Backend and Frontend in separate windows
