@@ -107,22 +107,28 @@ echo [4/4] Checking Port Availability...
 echo.
 
 REM Check if ports are available when servers are not running
+set "PORT_8000_LISTENING="
+netstat -ano | findstr :8000 | findstr LISTENING >nul 2>&1
+if %errorlevel% equ 0 set PORT_8000_LISTENING=1
+
 netstat -ano | findstr :8000 >nul 2>&1
 if %errorlevel% neq 0 (
     echo   Port 8000: [AVAILABLE]
 ) else (
-    netstat -ano | findstr :8000 | findstr LISTENING >nul 2>&1
-    if %errorlevel% neq 0 (
+    if not defined PORT_8000_LISTENING (
         echo   Port 8000: [IN USE by another process]
     )
 )
+
+set "PORT_3000_LISTENING="
+netstat -ano | findstr :3000 | findstr LISTENING >nul 2>&1
+if %errorlevel% equ 0 set PORT_3000_LISTENING=1
 
 netstat -ano | findstr :3000 >nul 2>&1
 if %errorlevel% neq 0 (
     echo   Port 3000: [AVAILABLE]
 ) else (
-    netstat -ano | findstr :3000 | findstr LISTENING >nul 2>&1
-    if %errorlevel% neq 0 (
+    if not defined PORT_3000_LISTENING (
         echo   Port 3000: [IN USE by another process]
     )
 )
@@ -134,14 +140,17 @@ echo ========================================================================
 echo.
 
 REM Overall status
-set ALL_RUNNING=0
+set BACKEND_RUNNING=0
+set FRONTEND_RUNNING=0
+
 netstat -ano | findstr :8000 | findstr LISTENING >nul 2>&1
-if %errorlevel% equ 0 (
-    netstat -ano | findstr :3000 | findstr LISTENING >nul 2>&1
-    if %errorlevel% equ 0 (
-        set ALL_RUNNING=1
-    )
-)
+if %errorlevel% equ 0 set BACKEND_RUNNING=1
+
+netstat -ano | findstr :3000 | findstr LISTENING >nul 2>&1
+if %errorlevel% equ 0 set FRONTEND_RUNNING=1
+
+set ALL_RUNNING=0
+if %BACKEND_RUNNING%==1 if %FRONTEND_RUNNING%==1 set ALL_RUNNING=1
 
 if %ALL_RUNNING%==1 (
     echo   Overall Status: [ALL SYSTEMS OPERATIONAL]
