@@ -18,38 +18,29 @@ set "SCRIPT_DIR=%~dp0"
 set "PROJECT_ROOT=%SCRIPT_DIR%..\\"
 
 echo [1/4] Checking PostgreSQL installation...
+set "PSQL_PATH="
 psql --version >nul 2>&1
-if %errorlevel% neq 0 (
+if %errorlevel% equ 0 (
+    set "PSQL_PATH=psql"
+) else (
     echo [WARNING] psql command not found in PATH
     echo   PostgreSQL may not be installed or not in PATH
     echo   Install from: https://www.postgresql.org/download/
     echo.
     echo Attempting to check via common installation paths...
 
-    REM Try common PostgreSQL installation paths
-    if exist "C:\Program Files\PostgreSQL\16\bin\psql.exe" (
-        set "PSQL_PATH=C:\Program Files\PostgreSQL\16\bin\psql.exe"
-        goto :psql_found
-    )
-    if exist "C:\Program Files\PostgreSQL\15\bin\psql.exe" (
-        set "PSQL_PATH=C:\Program Files\PostgreSQL\15\bin\psql.exe"
-        goto :psql_found
-    )
-    if exist "C:\Program Files\PostgreSQL\14\bin\psql.exe" (
-        set "PSQL_PATH=C:\Program Files\PostgreSQL\14\bin\psql.exe"
-        goto :psql_found
-    )
+    if exist "C:\Program Files\PostgreSQL\16\bin\psql.exe" set "PSQL_PATH=C:\Program Files\PostgreSQL\16\bin\psql.exe"
+    if exist "C:\Program Files\PostgreSQL\15\bin\psql.exe" if not defined PSQL_PATH set "PSQL_PATH=C:\Program Files\PostgreSQL\15\bin\psql.exe"
+    if exist "C:\Program Files\PostgreSQL\14\bin\psql.exe" if not defined PSQL_PATH set "PSQL_PATH=C:\Program Files\PostgreSQL\14\bin\psql.exe"
+)
 
+if not defined PSQL_PATH (
     echo [ERROR] Could not find PostgreSQL installation
     pause
     exit /b 1
-
-    :psql_found
-    echo   [OK] Found PostgreSQL at: %PSQL_PATH%
-) else (
-    set "PSQL_PATH=psql"
-    echo   [OK] PostgreSQL detected
 )
+
+echo   [OK] Found PostgreSQL at: %PSQL_PATH%
 echo.
 
 echo [2/4] Checking PostgreSQL service status...
