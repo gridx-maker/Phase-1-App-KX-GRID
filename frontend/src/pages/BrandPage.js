@@ -1,3 +1,4 @@
+import SplitText from '@/components/ui/SplitText';
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -54,7 +55,7 @@ const BrandPage = () => {
           </div>
         </header>
         <div className="max-w-7xl mx-auto px-6 py-20 text-center">
-          <h1 className="font-unbounded font-bold text-4xl text-white mb-4">Brand Not Found</h1>
+          <SplitText text="Brand Not Found" tag="h1" className="font-unbounded font-bold text-4xl text-white mb-4" />
           <p className="text-zinc-400 mb-8">{error}</p>
           <Button onClick={() => navigate('/')} className="btn-primary gap-2">
             <ArrowLeft className="w-4 h-4" />
