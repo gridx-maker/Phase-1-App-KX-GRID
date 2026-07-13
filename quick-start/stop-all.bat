@@ -1,4 +1,5 @@
 @echo off
+setlocal EnableDelayedExpansion
 REM ========================================================================
 REM  KXGRID - Stop All Servers
 REM  Terminates Backend and Frontend servers
@@ -64,7 +65,7 @@ if %BACKEND_FOUND%==1 (
     echo Stopping Backend server on port 8000...
     for /f "tokens=5" %%a in ('netstat -ano ^| findstr :8000 ^| findstr LISTENING') do (
         taskkill /PID %%a /F >nul 2>&1
-        if %errorlevel% equ 0 (
+        if !errorlevel! equ 0 (
             echo   [STOPPED] Backend server (PID: %%a)
         )
     )
@@ -75,7 +76,7 @@ if %FRONTEND_FOUND%==1 (
     echo Stopping Frontend server on port 3000...
     for /f "tokens=5" %%a in ('netstat -ano ^| findstr :3000 ^| findstr LISTENING') do (
         taskkill /PID %%a /F >nul 2>&1
-        if %errorlevel% equ 0 (
+        if !errorlevel! equ 0 (
             echo   [STOPPED] Frontend server (PID: %%a)
         )
     )
