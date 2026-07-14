@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import KotlerXLogo from '@/components/KotlerXLogo';
 import PromoCarousel from '@/components/PromoCarousel';
 import TiltedCard from '@/components/ui/TiltedCard';
+import CursorGrid from '@/components/ui/CursorGrid';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { 
@@ -250,7 +251,23 @@ const LandingPage = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background" />
-        <div className="absolute inset-0 grid-texture" />
+        <div className="absolute inset-0 z-0">
+          <CursorGrid
+            cellSize={60}
+            color="#00FF94"
+            radius={160}
+            falloff="smooth"
+            holdTime={400}
+            fadeDuration={800}
+            lineWidth={1.0}
+            maxOpacity={0.7}
+            fillOpacity={0.05}
+            gridOpacity={0.03}
+            cellRadius={2}
+            clickPulse={true}
+            pulseSpeed={600}
+          />
+        </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
           {/* Main Tagline - Proper spacing */}
@@ -358,7 +375,23 @@ const LandingPage = () => {
 
       {/* Programs Section */}
       <section id="programs" className="py-32 relative bg-surface">
-        <div className="absolute inset-0 grid-texture opacity-50" />
+        <div className="absolute inset-0 z-0">
+          <CursorGrid
+            cellSize={60}
+            color="#00FF94"
+            radius={160}
+            falloff="smooth"
+            holdTime={400}
+            fadeDuration={800}
+            lineWidth={1.0}
+            maxOpacity={0.4}
+            fillOpacity={0.03}
+            gridOpacity={0.015}
+            cellRadius={2}
+            clickPulse={true}
+            pulseSpeed={600}
+          />
+        </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
             <h2 className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4">
