@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SplitText from '@/components/ui/SplitText';
+import BlurText from '@/components/ui/BlurText';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -280,11 +281,14 @@ const LandingPage = () => {
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          {/* Main Tagline - Proper spacing */}
-          <SplitText 
-            text="LEARN. EXECUTE. LEAD." 
-            tag="h1" 
-            className="font-unbounded font-black text-3xl md:text-5xl lg:text-6xl tracking-tight mb-8 animate-slide-up text-white" 
+          {/* Main Tagline - Blur Text Animation */}
+          <BlurText
+            text="LEARN. EXECUTE. LEAD."
+            animateBy="letters"
+            direction="top"
+            delay={50}
+            stepDuration={0.8}
+            className="font-unbounded font-black text-3xl md:text-5xl lg:text-6xl tracking-tight mb-8 text-white"
           />
           
           {/* Hero Logo with Purple Glow */}
