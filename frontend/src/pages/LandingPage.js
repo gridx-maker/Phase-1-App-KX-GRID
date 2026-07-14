@@ -10,6 +10,7 @@ import PromoCarousel from '@/components/PromoCarousel';
 import TiltedCard from '@/components/ui/TiltedCard';
 import CursorGrid from '@/components/ui/CursorGrid';
 import Magnet from '@/components/ui/Magnet';
+import ImageTrail from '@/components/ui/ImageTrail';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { 
@@ -471,83 +472,32 @@ const LandingPage = () => {
             </p>
           </div>
 
-          {mediaGallery.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {mediaGallery.map((item, i) => (
-                <div 
-                  key={item.media_id || i}
-                  className="relative rounded-xl overflow-hidden group cursor-pointer aspect-square"
-                >
-                  {item.media_type === 'video' ? (
-                    <>
-                      <img 
-                        src={item.thumbnail_base64 || item.thumbnail_url || item.media_base64 || item.url} 
-                        alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/60 transition-colors">
-                        <div className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center">
-                          <Play className="w-8 h-8 text-black ml-1" fill="currentColor" />
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <img 
-                        src={item.media_base64 || item.url} 
-                        alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div className="absolute bottom-4 left-4 right-4">
-                          <p className="text-white font-semibold text-sm">{item.title}</p>
-                          {item.description && (
-                            <p className="text-zinc-300 text-xs mt-1 line-clamp-2">{item.description}</p>
-                          )}
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-              ))}
+          {/* Interactive Image Trail */}
+          <div style={{ height: '500px', position: 'relative', overflow: 'hidden' }} className="rounded-2xl bg-gradient-to-b from-zinc-900/50 to-transparent border border-white/5">
+            <ImageTrail
+              items={[
+                'https://picsum.photos/id/119/300/300',
+                'https://picsum.photos/id/180/300/300',
+                'https://picsum.photos/id/244/300/300',
+                'https://picsum.photos/id/367/300/300',
+                'https://picsum.photos/id/381/300/300',
+                'https://picsum.photos/id/430/300/300',
+                'https://picsum.photos/id/494/300/300',
+                'https://picsum.photos/id/582/300/300',
+                'https://picsum.photos/id/659/300/300',
+                'https://picsum.photos/id/718/300/300',
+              ]}
+              variant={7}
+            />
+            {/* Overlay text hint */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="text-center bg-black/40 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10">
+                <p className="text-white/80 text-sm font-inter">
+                  Move your cursor to see the magic ✨
+                </p>
+              </div>
             </div>
-          ) : (
-            /* Placeholder gallery when no media uploaded */
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[ 
-                { icon: Users, label: "Students", color: "from-cyan-500 to-blue-600" },
-                { icon: Award, label: "Achievements", color: "from-purple-500 to-pink-600" },
-                { icon: Smartphone, label: "NFC Tech", color: "from-orange-500 to-red-600" },
-                { icon: Star, label: "Excellence", color: "from-green-500 to-teal-600" }
-              ].map((item, i) => (
-                <div key={i} className="aspect-square relative cursor-pointer group">
-                  <TiltedCard
-                    imageSrc={null}
-                    altText={item.label}
-                    captionText={item.label}
-                    containerHeight="100%"
-                    containerWidth="100%"
-                    imageHeight="100%"
-                    imageWidth="100%"
-                    rotateAmplitude={12}
-                    scaleOnHover={1.05}
-                    showMobileWarning={false}
-                    showTooltip={false}
-                    displayOverlayContent={true}
-                    cardBackgroundClassName={`bg-gradient-to-br ${item.color}`}
-                    overlayContent={
-                      <div className="flex flex-col items-center justify-center text-white p-6 w-full h-full">
-                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none rounded-[15px] z-[1]" />
-                        <item.icon className="w-12 h-12 mb-3 drop-shadow-md relative z-10" />
-                        <span className="font-unbounded font-semibold text-lg drop-shadow-md relative z-10 text-center">{item.label}</span>
-                        <span className="text-xs text-white/90 mt-1 drop-shadow-md font-medium relative z-10">Coming Soon</span>
-                      </div>
-                    }
-                  />
-                </div>
-              ))}
-            </div>
-          )}
+          </div>
         </div>
       </section>
 
