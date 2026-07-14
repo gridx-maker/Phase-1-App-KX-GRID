@@ -251,7 +251,7 @@ const LandingPage = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background" />
-        <div className="absolute inset-0 z-0">
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0 }}>
           <CursorGrid
             cellSize={60}
             color="#00FF94"
@@ -375,7 +375,7 @@ const LandingPage = () => {
 
       {/* Programs Section */}
       <section id="programs" className="py-32 relative bg-surface">
-        <div className="absolute inset-0 z-0">
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0 }}>
           <CursorGrid
             cellSize={60}
             color="#00FF94"
