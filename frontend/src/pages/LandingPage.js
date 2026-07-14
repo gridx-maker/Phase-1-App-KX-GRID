@@ -9,6 +9,7 @@ import KotlerXLogo from '@/components/KotlerXLogo';
 import PromoCarousel from '@/components/PromoCarousel';
 import TiltedCard from '@/components/ui/TiltedCard';
 import CursorGrid from '@/components/ui/CursorGrid';
+import Magnet from '@/components/ui/Magnet';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { 
@@ -195,13 +196,15 @@ const LandingPage = () => {
           <div className="hidden md:flex items-center gap-8">
             <a href="#features" className="text-zinc-300 hover:text-[#00e5ff] transition-colors font-inter text-sm font-medium">Features</a>
             <a href="#programs" className="text-zinc-300 hover:text-[#00e5ff] transition-colors font-inter text-sm font-medium">Programs</a>
-            <Button 
-              onClick={() => navigate('/programs')}
-              className="bg-[#00e5ff] text-black hover:bg-[#00e5ff]/90 px-6 font-semibold transition-all"
-              data-testid="nav-programs-btn"
-            >
-              View Programs
-            </Button>
+            <Magnet padding={50} magnetStrength={40}>
+              <Button
+                onClick={() => navigate('/programs')}
+                className="bg-[#00e5ff] text-black hover:bg-[#00e5ff]/90 px-6 font-semibold transition-all"
+                data-testid="nav-programs-btn"
+              >
+                View Programs
+              </Button>
+            </Magnet>
           </div>
 
           {/* Mobile Hamburger Menu */}
@@ -221,27 +224,33 @@ const LandingPage = () => {
           <div className="md:hidden bg-zinc-950 border-t border-white/10 py-4 px-6 space-y-4 shadow-lg">
             <a href="#features" className="block text-zinc-300 hover:text-[#00e5ff] transition-colors font-inter font-medium" onClick={() => setMobileMenuOpen(false)}>Features</a>
             <a href="#programs" className="block text-zinc-300 hover:text-[#00e5ff] transition-colors font-inter font-medium" onClick={() => setMobileMenuOpen(false)}>Programs</a>
-            <Button 
-              onClick={() => { navigate('/programs'); setMobileMenuOpen(false); }}
-              className="bg-[#00e5ff] text-black hover:bg-[#00e5ff]/90 w-full font-semibold"
-            >
-              View Programs
-            </Button>
+            <Magnet padding={50} magnetStrength={40} disabled={true}>
+              <Button
+                onClick={() => { navigate('/programs'); setMobileMenuOpen(false); }}
+                className="bg-[#00e5ff] text-black hover:bg-[#00e5ff]/90 w-full font-semibold"
+              >
+                View Programs
+              </Button>
+            </Magnet>
             <div className="pt-2 border-t border-white/10 space-y-2">
-              <Button 
-                variant="outline"
-                onClick={() => { navigate('/login/student'); setMobileMenuOpen(false); }}
-                className="w-full border-white/10 text-white hover:border-[#00e5ff] hover:text-[#00e5ff]"
-              >
-                Student Login
-              </Button>
-              <Button 
-                variant="outline"
-                onClick={() => { navigate('/login/office'); setMobileMenuOpen(false); }}
-                className="w-full border-white/10 text-white hover:border-[#00e5ff] hover:text-[#00e5ff]"
-              >
-                Office Login
-              </Button>
+              <Magnet padding={50} magnetStrength={40} disabled={true}>
+                <Button
+                  variant="outline"
+                  onClick={() => { navigate('/login/student'); setMobileMenuOpen(false); }}
+                  className="w-full border-white/10 text-white hover:border-[#00e5ff] hover:text-[#00e5ff]"
+                >
+                  Student Login
+                </Button>
+              </Magnet>
+              <Magnet padding={50} magnetStrength={40} disabled={true}>
+                <Button
+                  variant="outline"
+                  onClick={() => { navigate('/login/office'); setMobileMenuOpen(false); }}
+                  className="w-full border-white/10 text-white hover:border-[#00e5ff] hover:text-[#00e5ff]"
+                >
+                  Office Login
+                </Button>
+              </Magnet>
             </div>
           </div>
         )}
@@ -305,21 +314,25 @@ const LandingPage = () => {
 
           {/* Hero CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10 animate-slide-up" style={{ animationDelay: '0.25s' }}>
-            <Button 
-              onClick={() => navigate('/programs')}
-              className="btn-primary h-12 px-8 text-base font-bold w-full sm:w-auto"
-              data-testid="hero-programs-btn"
-            >
-              VIEW PROGRAMS
-            </Button>
-            <Button 
-              onClick={() => navigate('/register')}
-              variant="outline"
-              className="border-primary/50 text-primary hover:bg-primary/10 h-12 px-8 text-base font-bold w-full sm:w-auto"
-              data-testid="hero-apply-btn"
-            >
-              APPLY NOW
-            </Button>
+            <Magnet padding={60} magnetStrength={35}>
+              <Button
+                onClick={() => navigate('/programs')}
+                className="btn-primary h-12 px-8 text-base font-bold w-full sm:w-auto"
+                data-testid="hero-programs-btn"
+              >
+                VIEW PROGRAMS
+              </Button>
+            </Magnet>
+            <Magnet padding={60} magnetStrength={35}>
+              <Button
+                onClick={() => navigate('/register')}
+                variant="outline"
+                className="border-primary/50 text-primary hover:bg-primary/10 h-12 px-8 text-base font-bold w-full sm:w-auto"
+                data-testid="hero-apply-btn"
+              >
+                APPLY NOW
+              </Button>
+            </Magnet>
           </div>
 
           {/* Stats */}
@@ -548,13 +561,15 @@ const LandingPage = () => {
           <p className="font-inter text-lg text-zinc-400 mb-10">
             Explore our programmes and start your journey today
           </p>
-          <Button 
-            onClick={() => navigate('/programs')}
-            className="btn-primary h-14 px-12 text-lg"
-            data-testid="cta-programs-btn"
-          >
-            View Programs
-          </Button>
+          <Magnet padding={70} magnetStrength={30}>
+            <Button
+              onClick={() => navigate('/programs')}
+              className="btn-primary h-14 px-12 text-lg"
+              data-testid="cta-programs-btn"
+            >
+              View Programs
+            </Button>
+          </Magnet>
         </div>
       </section>
 
@@ -793,34 +808,40 @@ const LandingPage = () => {
           
           {/* Contact CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <Button 
-              onClick={() => setCallbackOpen(true)}
-              className="btn-primary h-14 px-8 gap-2 w-full sm:w-auto"
-              data-testid="request-callback-btn"
-            >
-              <Phone className="w-5 h-5" />
-              Request Call Back
-            </Button>
-            
-            <Button 
-              onClick={openWhatsApp}
-              variant="outline"
-              className="h-14 px-8 gap-2 border-green-500/50 text-green-400 hover:bg-green-500/10 w-full sm:w-auto"
-              data-testid="whatsapp-btn"
-            >
-              <MessageSquare className="w-5 h-5" />
-              Message Us
-            </Button>
-            
-            <Button 
-              onClick={() => setContactPopupOpen(true)}
-              variant="outline"
-              className="h-14 px-8 gap-2 border-white/20 text-zinc-300 hover:bg-white/5 w-full sm:w-auto"
-              data-testid="contact-us-btn"
-            >
-              <Phone className="w-5 h-5" />
-              Contact Us
-            </Button>
+            <Magnet padding={60} magnetStrength={35}>
+              <Button
+                onClick={() => setCallbackOpen(true)}
+                className="btn-primary h-14 px-8 gap-2 w-full sm:w-auto"
+                data-testid="request-callback-btn"
+              >
+                <Phone className="w-5 h-5" />
+                Request Call Back
+              </Button>
+            </Magnet>
+
+            <Magnet padding={60} magnetStrength={35}>
+              <Button
+                onClick={openWhatsApp}
+                variant="outline"
+                className="h-14 px-8 gap-2 border-green-500/50 text-green-400 hover:bg-green-500/10 w-full sm:w-auto"
+                data-testid="whatsapp-btn"
+              >
+                <MessageSquare className="w-5 h-5" />
+                Message Us
+              </Button>
+            </Magnet>
+
+            <Magnet padding={60} magnetStrength={35}>
+              <Button
+                onClick={() => setContactPopupOpen(true)}
+                variant="outline"
+                className="h-14 px-8 gap-2 border-white/20 text-zinc-300 hover:bg-white/5 w-full sm:w-auto"
+                data-testid="contact-us-btn"
+              >
+                <Phone className="w-5 h-5" />
+                Contact Us
+              </Button>
+            </Magnet>
           </div>
 
           {/* Contact Icons */}
@@ -884,14 +905,16 @@ const LandingPage = () => {
                 placeholder="What would you like to discuss?"
               />
             </div>
-            <Button 
-              onClick={submitCallbackRequest} 
-              disabled={submittingCallback}
-              className="w-full btn-primary"
-            >
-              {submittingCallback ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-              Submit Request
-            </Button>
+            <Magnet padding={50} magnetStrength={40} disabled={true}>
+              <Button
+                onClick={submitCallbackRequest}
+                disabled={submittingCallback}
+                className="w-full btn-primary"
+              >
+                {submittingCallback ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                Submit Request
+              </Button>
+            </Magnet>
           </div>
         </DialogContent>
       </Dialog>

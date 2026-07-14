@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import Magnet from '@/components/ui/Magnet';
 import { toast } from 'sonner';
 import axios from 'axios';
 import { 
@@ -331,22 +332,26 @@ const PromoCarousel = () => {
               />
             </div>
             <div className="flex gap-3 pt-4">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setRegistrationOpen(false)}
-                className="flex-1 border-zinc-700 text-zinc-300"
-              >
-                Cancel
-              </Button>
-              <Button
-                type="submit"
-                disabled={submitting}
-                className="flex-1 bg-gradient-to-r from-primary to-secondary text-black font-semibold"
-                data-testid="workshop-reg-submit"
-              >
-                {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Register'}
-              </Button>
+              <Magnet padding={50} magnetStrength={40} disabled={true}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setRegistrationOpen(false)}
+                  className="flex-1 border-zinc-700 text-zinc-300"
+                >
+                  Cancel
+                </Button>
+              </Magnet>
+              <Magnet padding={50} magnetStrength={40} disabled={true}>
+                <Button
+                  type="submit"
+                  disabled={submitting}
+                  className="flex-1 bg-gradient-to-r from-primary to-secondary text-black font-semibold"
+                  data-testid="workshop-reg-submit"
+                >
+                  {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Register'}
+                </Button>
+              </Magnet>
             </div>
           </form>
         </DialogContent>
