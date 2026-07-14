@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SplitText from '@/components/ui/SplitText';
 import BlurText from '@/components/ui/BlurText';
+import DecryptedText from '@/components/ui/DecryptedText';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -303,13 +304,31 @@ const LandingPage = () => {
             </div>
           </div>
           
-          {/* Subtitle */}
+          {/* Subtitle with DecryptedText */}
           <div className="animate-slide-up mb-6" style={{ animationDelay: '0.15s' }}>
-            <h2 className="font-unbounded font-bold text-xl md:text-2xl lg:text-3xl text-white mb-2">
-              India's First University Integrated
+            <h2 className="font-unbounded font-bold text-xl md:text-2xl lg:text-3xl mb-2">
+              <DecryptedText
+                text="India's First University Integrated"
+                speed={40}
+                sequential={true}
+                revealDirection="start"
+                animateOn="hover"
+                className="text-white"
+                encryptedClassName="text-white/40"
+                useOriginalCharsOnly={true}
+              />
             </h2>
-            <h2 className="font-unbounded font-bold text-xl md:text-2xl lg:text-3xl text-primary">
-              Automotive, Motorsport & Media Skill Programmes
+            <h2 className="font-unbounded font-bold text-xl md:text-2xl lg:text-3xl">
+              <DecryptedText
+                text="Automotive, Motorsport & Media Skill Programmes"
+                speed={40}
+                sequential={true}
+                revealDirection="start"
+                animateOn="hover"
+                className="text-primary"
+                encryptedClassName="text-primary/40"
+                useOriginalCharsOnly={true}
+              />
             </h2>
           </div>
           
