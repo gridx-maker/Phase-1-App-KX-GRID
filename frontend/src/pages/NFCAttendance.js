@@ -1,3 +1,4 @@
+import SplitText from '@/components/ui/SplitText';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
@@ -163,7 +164,7 @@ const NFCAttendance = () => {
               <ChevronLeft className="w-5 h-5" />
             </Button>
             <div>
-              <h1 className="font-unbounded font-bold text-xl text-white">NFC Attendance</h1>
+              <SplitText text="NFC Attendance" tag="h1" className="font-unbounded font-bold text-xl text-white" />
               <p className="text-sm text-zinc-500">Tap to mark attendance</p>
             </div>
           </div>

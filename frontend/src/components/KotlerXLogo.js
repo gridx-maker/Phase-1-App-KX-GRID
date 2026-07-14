@@ -8,7 +8,7 @@ const DEFAULT_LOGO_URL = "https://customer-assets.emergentagent.com/job_984a459f
 
 const KOTLERX_HEADER_LOGO = "https://customer-assets.emergentagent.com/job_b4ac6a41-177f-4a95-b224-80c582d4333d/artifacts/mctfn4tr_Typograpghy%20White%20Transparent-04.png";
 
-const KotlerXLogo = ({ size = 'md', className = '', variant = 'default' }) => {
+const KotlerXLogo = ({ size = 'md', className = '', imgClassName = '', variant = 'default' }) => {
   const [settings, setSettings] = useState({ 
     logo_text_1: 'KX', 
     logo_text_2: 'GRID',
@@ -52,7 +52,10 @@ const KotlerXLogo = ({ size = 'md', className = '', variant = 'default' }) => {
         <img 
           src={KOTLERX_HEADER_LOGO}
           alt="KotlerX" 
-          className="h-32 md:h-44 w-auto object-contain"
+          className={`h-32 md:h-44 w-auto object-contain ${imgClassName}`}
+          style={{
+            filter: 'brightness(0) saturate(100%) invert(77%) sepia(86%) saturate(2716%) hue-rotate(152deg) brightness(101%) contrast(101%)'
+          }}
         />
       </div>
     );
@@ -64,7 +67,7 @@ const KotlerXLogo = ({ size = 'md', className = '', variant = 'default' }) => {
       <img 
         src={settings.logo_image} 
         alt="KotlerX" 
-        className={`${s.img} w-auto object-contain`}
+        className={`${s.img} w-auto object-contain ${imgClassName}`}
       />
     </div>
   );

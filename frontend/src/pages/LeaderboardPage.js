@@ -1,3 +1,4 @@
+import SplitText from '@/components/ui/SplitText';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
@@ -53,7 +54,7 @@ const LeaderboardPage = () => {
           </Button>
           <div className="flex items-center gap-3">
             <Trophy className="w-6 h-6 text-accent-warning" />
-            <h1 className="font-unbounded font-bold text-xl text-white">Leaderboard</h1>
+            <SplitText text="Leaderboard" tag="h1" className="font-unbounded font-bold text-xl text-white" />
           </div>
         </div>
       </header>

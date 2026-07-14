@@ -1,3 +1,4 @@
+import SplitText from '@/components/ui/SplitText';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
@@ -56,7 +57,7 @@ const CertificatesPage = () => {
           </Button>
           <div className="flex items-center gap-3">
             <FileCheck className="w-6 h-6 text-secondary" />
-            <h1 className="font-unbounded font-bold text-xl text-white">My Certificates</h1>
+            <SplitText text="My Certificates" tag="h1" className="font-unbounded font-bold text-xl text-white" />
           </div>
         </div>
       </header>

@@ -1,3 +1,4 @@
+import SplitText from '@/components/ui/SplitText';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
@@ -1834,7 +1835,7 @@ const AdminPanel = () => {
           <div className="flex items-center gap-4">
             <KotlerXLogo size="md" />
             <div className="hidden sm:block">
-              <h1 className="font-unbounded font-bold text-xl text-white">Admin Panel</h1>
+              <SplitText text="Admin Panel" tag="h1" className="font-unbounded font-bold text-xl text-white" />
               <p className="text-sm text-zinc-500">University Management Console</p>
             </div>
           </div>

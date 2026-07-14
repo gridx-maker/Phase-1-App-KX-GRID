@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import SplitText from '@/components/ui/SplitText';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -409,10 +410,11 @@ const CrewAttendanceMode = () => {
               <ChevronLeft className="w-5 h-5" />
             </Button>
             <div>
-              <h1 className="font-unbounded font-bold text-xl text-white flex items-center gap-2">
-                <Radio className="w-5 h-5 text-primary" />
-                NFC Attendance Mode
-              </h1>
+              <SplitText 
+                text="NFC Attendance Mode" 
+                tag="h1" 
+                className="font-unbounded font-bold text-xl text-white flex items-center gap-2" 
+              />
               <p className="text-sm text-zinc-500">
                 {activeSession ? `Session: ${activeSession.unit_name}` : 'Start a session to begin'}
               </p>

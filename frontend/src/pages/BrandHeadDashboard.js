@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import SplitText from '@/components/ui/SplitText';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -321,7 +322,11 @@ const BrandHeadDashboard = () => {
                 </div>
               )}
               <div>
-                <h1 className="font-unbounded font-bold text-2xl text-white mb-1">{brand?.name}</h1>
+                <SplitText 
+                  text={brand?.name || ""} 
+                  tag="h1" 
+                  className="font-unbounded font-bold text-2xl text-white mb-1" 
+                />
                 <p className="text-zinc-400">{brand?.description}</p>
                 {brand?.tagline && (
                   <p className="text-sm mt-1" style={{ color: brandColor }}>{brand.tagline}</p>

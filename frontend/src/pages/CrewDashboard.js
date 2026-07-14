@@ -1,3 +1,4 @@
+import SplitText from '@/components/ui/SplitText';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
@@ -266,7 +267,7 @@ const CrewDashboard = () => {
             <KotlerXLogo size="md" />
             <div className="hidden sm:block">
               <div className="flex items-center gap-2">
-                <h1 className="font-unbounded font-bold text-lg text-white">Crew Dashboard</h1>
+                <SplitText text="Crew Dashboard" tag="h1" className="font-unbounded font-bold text-lg text-white" />
                 {dashboardData?.brand && (
                   <span 
                     className="px-2 py-0.5 rounded text-xs font-mono"
