@@ -97,15 +97,14 @@ const KXCraftPage = () => {
         <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
           <div className="flex flex-col-reverse md:flex-row items-center justify-between">
             <div className="max-w-2xl flex-1">
-              <ScrollReveal
-                baseOpacity={0}
-                enableBlur={true}
-                baseRotation={4}
-                blurStrength={8}
-                containerClassName="mb-4"
+              <GlitchText
+                speed={1.2}
+                enableShadows={true}
+                enableOnHover={true}
+                className="font-unbounded font-bold text-3xl md:text-5xl lg:text-6xl text-white mt-3 mb-4 leading-tight"
               >
                 Motorsport Collectibles
-              </ScrollReveal>
+              </GlitchText>
               <ScrollReveal
                 baseOpacity={0.2}
                 enableBlur={true}

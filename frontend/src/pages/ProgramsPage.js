@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import GlitchText from '@/components/ui/GlitchText';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -224,15 +225,14 @@ const ProgramsPage = () => {
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-          <ScrollReveal
-            baseOpacity={0}
-            enableBlur={true}
-            baseRotation={4}
-            blurStrength={8}
-            containerClassName="text-center mb-6"
+          <GlitchText
+            speed={1.2}
+            enableShadows={true}
+            enableOnHover={true}
+            className="font-unbounded font-black tracking-tight mb-6 text-white leading-tight"
           >
             Unlock Your Full Potential
-          </ScrollReveal>
+          </GlitchText>
 
           <ScrollReveal
             baseOpacity={0.2}

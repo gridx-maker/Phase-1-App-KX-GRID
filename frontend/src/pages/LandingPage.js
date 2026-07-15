@@ -3,6 +3,7 @@ import SplitText from '@/components/ui/SplitText';
 import BlurText from '@/components/ui/BlurText';
 import DecryptedText from '@/components/ui/DecryptedText';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import GlitchText from '@/components/ui/GlitchText';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -384,15 +385,14 @@ const LandingPage = () => {
       <section id="features" className="py-32 relative">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <ScrollReveal
-              baseOpacity={0}
-              enableBlur={true}
-              baseRotation={3}
-              blurStrength={6}
-              containerClassName="text-center"
+            <GlitchText
+              speed={1.2}
+              enableShadows={true}
+              enableOnHover={false}
+              className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4"
             >
               UNIFIED PLATFORM
-            </ScrollReveal>
+            </GlitchText>
             <ScrollReveal
               baseOpacity={0.2}
               enableBlur={true}
@@ -441,15 +441,14 @@ const LandingPage = () => {
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
-            <ScrollReveal
-              baseOpacity={0}
-              enableBlur={true}
-              baseRotation={3}
-              blurStrength={6}
-              containerClassName="text-center"
+            <GlitchText
+              speed={1.2}
+              enableShadows={true}
+              enableOnHover={false}
+              className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4"
             >
               PROGRAMS
-            </ScrollReveal>
+            </GlitchText>
             <ScrollReveal
               baseOpacity={0.2}
               enableBlur={true}
@@ -508,15 +507,14 @@ const LandingPage = () => {
       <section className="py-24 relative">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
-            <ScrollReveal
-              baseOpacity={0}
-              enableBlur={true}
-              baseRotation={3}
-              blurStrength={6}
-              containerClassName="text-center"
+            <GlitchText
+              speed={1.2}
+              enableShadows={true}
+              enableOnHover={false}
+              className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4"
             >
               EXPERIENCE KXGRID
-            </ScrollReveal>
+            </GlitchText>
             <ScrollReveal
               baseOpacity={0.2}
               enableBlur={true}
@@ -560,15 +558,14 @@ const LandingPage = () => {
       <section className="py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-secondary/20 to-primary/20 opacity-50" />
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <ScrollReveal
-            baseOpacity={0}
-            enableBlur={true}
-            baseRotation={4}
-            blurStrength={8}
-            containerClassName="text-center mb-6"
+          <GlitchText
+            speed={1.2}
+            enableShadows={true}
+            enableOnHover={false}
+            className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-6"
           >
             READY TO JOIN?
-          </ScrollReveal>
+          </GlitchText>
           <ScrollReveal
             baseOpacity={0.2}
             enableBlur={true}
@@ -593,15 +590,14 @@ const LandingPage = () => {
       {partners.length > 0 && (
         <section className="py-12 md:py-16 border-t border-white/5 overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-8">
-            <ScrollReveal
-              baseOpacity={0}
-              enableBlur={true}
-              baseRotation={2}
-              blurStrength={4}
-              containerClassName="text-center mb-2"
+            <GlitchText
+              speed={1.2}
+              enableShadows={true}
+              enableOnHover={false}
+              className="font-unbounded font-bold text-xl md:text-2xl text-white text-center mb-2"
             >
               OUR PARTNERS & SPONSORS
-            </ScrollReveal>
+            </GlitchText>
             <ScrollReveal
               baseOpacity={0.3}
               enableBlur={true}
@@ -768,15 +764,14 @@ const LandingPage = () => {
       {director && (
         <section className="py-20 border-t border-white/5">
           <div className="max-w-5xl mx-auto px-6">
-            <ScrollReveal
-              baseOpacity={0}
-              enableBlur={true}
-              baseRotation={3}
-              blurStrength={6}
-              containerClassName="text-center mb-12"
+            <GlitchText
+              speed={1.2}
+              enableShadows={true}
+              enableOnHover={false}
+              className="font-unbounded font-bold text-2xl text-white text-center mb-12"
             >
               MESSAGE FROM PROGRAMME DIRECTOR
-            </ScrollReveal>
+            </GlitchText>
             
             <div className="relative rounded-3xl overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 opacity-50" />
@@ -832,15 +827,14 @@ const LandingPage = () => {
       {/* Contact Section */}
       <section className="py-20 border-t border-white/5 bg-gradient-to-b from-transparent to-black/20">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <ScrollReveal
-            baseOpacity={0}
-            enableBlur={true}
-            baseRotation={3}
-            blurStrength={6}
-            containerClassName="text-center mb-4"
+          <GlitchText
+            speed={1.2}
+            enableShadows={true}
+            enableOnHover={false}
+            className="font-unbounded font-bold text-3xl md:text-4xl text-white mb-4"
           >
             {contactInfo?.heading_text || "Have Questions? Let's Connect"}
-          </ScrollReveal>
+          </GlitchText>
           <ScrollReveal
             baseOpacity={0.2}
             enableBlur={true}

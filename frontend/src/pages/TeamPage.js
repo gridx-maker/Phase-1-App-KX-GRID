@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import GlitchText from '@/components/ui/GlitchText';
 import { ChevronLeft, Plus, Minus, Users, GraduationCap, Briefcase } from 'lucide-react';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -133,15 +134,14 @@ const TeamPage = () => {
 
       {/* Hero Section */}
       <section className="py-16 px-6 text-center bg-gradient-to-b from-zinc-900/50 to-transparent">
-        <ScrollReveal
-          baseOpacity={0}
-          enableBlur={true}
-          baseRotation={3}
-          blurStrength={6}
-          containerClassName="text-center mb-4"
+        <GlitchText
+          speed={1.2}
+          enableShadows={true}
+          enableOnHover={true}
+          className="text-4xl md:text-5xl font-bold mb-4"
         >
           Meet The Team
-        </ScrollReveal>
+        </GlitchText>
         <ScrollReveal
           baseOpacity={0.2}
           enableBlur={true}
@@ -161,7 +161,14 @@ const TeamPage = () => {
           <div className="max-w-6xl mx-auto">
             <div className="flex items-center gap-3 mb-10 justify-center">
               <GraduationCap className="w-8 h-8 text-cyan-400" />
-              <h2 className="text-3xl font-bold text-white">Instructors & Tutors</h2>
+              <GlitchText
+                speed={1.2}
+                enableShadows={true}
+                enableOnHover={true}
+                className="text-3xl font-bold text-white"
+              >
+                Instructors & Tutors
+              </GlitchText>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -186,7 +193,14 @@ const TeamPage = () => {
           <div className="max-w-6xl mx-auto">
             <div className="flex items-center gap-3 mb-6 justify-center">
               <Briefcase className="w-8 h-8 text-amber-400" />
-              <h2 className="text-3xl font-bold text-white">Support Staff</h2>
+              <GlitchText
+                speed={1.2}
+                enableShadows={true}
+                enableOnHover={true}
+                className="text-3xl font-bold text-white"
+              >
+                Support Staff
+              </GlitchText>
             </div>
             <p className="text-zinc-400 text-center mb-10 max-w-2xl mx-auto">
               Our dedicated support team is here to help with admissions, coordination, and any assistance you may need throughout your journey.
@@ -213,15 +227,14 @@ const TeamPage = () => {
       {/* CTA Section */}
       <section className="py-16 px-6 bg-gradient-to-t from-zinc-900 to-transparent">
         <div className="max-w-4xl mx-auto text-center">
-          <ScrollReveal
-            baseOpacity={0}
-            enableBlur={true}
-            baseRotation={3}
-            blurStrength={6}
-            containerClassName="text-center mb-4"
+          <GlitchText
+            speed={1.2}
+            enableShadows={true}
+            enableOnHover={true}
+            className="text-3xl md:text-4xl font-bold text-white mb-4"
           >
             Ready to Accelerate Your Motorsport Career?
-          </ScrollReveal>
+          </GlitchText>
           <button
             onClick={() => navigate('/register')}
             className="mt-6 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-bold py-4 px-10 rounded-lg transition-all duration-300 hover:scale-105 flex items-center gap-2 mx-auto"
