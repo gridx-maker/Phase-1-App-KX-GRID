@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import kotlerxLogo from '../images/Vertical Logo with BG-01.png';
 import SplitText from '@/components/ui/SplitText';
 import DecryptedText from '@/components/ui/DecryptedText';
+import ScrollReveal from '@/components/ui/ScrollReveal';
+import GlitchText from '@/components/ui/GlitchText';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -287,22 +289,22 @@ const LandingPage = () => {
 
   // API fetchers
   const fetchPrograms = async () => {
-    try { const r = await axios.get(`${API}/programs`); setPrograms(r.data || []); } catch {}
+    try { const r = await axios.get(`${API}/programs`); setPrograms(r.data || []); } catch { }
   };
   const fetchCmsContent = async () => {
-    try { const r = await axios.get(`${API}/cms/landing`); setCmsContent(r.data); } catch {}
+    try { const r = await axios.get(`${API}/cms/landing`); setCmsContent(r.data); } catch { }
   };
   const fetchMediaGallery = async () => {
-    try { const r = await axios.get(`${API}/media/gallery/public`); setMediaGallery(r.data || []); } catch {}
+    try { const r = await axios.get(`${API}/media/gallery/public`); setMediaGallery(r.data || []); } catch { }
   };
   const fetchPartners = async () => {
-    try { const r = await axios.get(`${API}/partners`); setPartners(r.data || []); } catch {}
+    try { const r = await axios.get(`${API}/partners`); setPartners(r.data || []); } catch { }
   };
   const fetchDirector = async () => {
-    try { const r = await axios.get(`${API}/cms/programme-director`); setDirector(r.data); } catch {}
+    try { const r = await axios.get(`${API}/cms/programme-director`); setDirector(r.data); } catch { }
   };
   const fetchContactInfo = async () => {
-    try { const r = await axios.get(`${API}/cms/contact-info`); setContactInfo(r.data); } catch {}
+    try { const r = await axios.get(`${API}/cms/contact-info`); setContactInfo(r.data); } catch { }
   };
 
   const submitCallbackRequest = async () => {
@@ -492,12 +494,15 @@ const LandingPage = () => {
         {/* subtle section divider line */}
         <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         <div className="max-w-7xl mx-auto px-6">
-          <div ref={featuresTitleRef} className="text-center mb-16">
-            <p className="font-inter text-xs text-primary tracking-[0.2em] uppercase mb-3">Platform Capabilities</p>
-            <h2 className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4">UNIFIED PLATFORM</h2>
+          <div className="text-center mb-16">
+            <SplitText
+              text="UNIFIED PLATFORM"
+              tag="h2"
+              className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4"
+            />
             <p className="font-inter text-zinc-400 max-w-xl mx-auto">
               One platform connecting all operations, departments, and stakeholders
-            </p>
+            </ScrollReveal>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -515,10 +520,13 @@ const LandingPage = () => {
         </div>
         <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div ref={programsTitleRef} className="text-center mb-16">
-            <p className="font-inter text-xs text-primary tracking-[0.2em] uppercase mb-3">What We Offer</p>
-            <h2 className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4">PROGRAMS</h2>
-            <p className="font-inter text-zinc-400 max-w-xl mx-auto">Automotive, Motorsport &amp; Media Skill Programmes</p>
+          <div className="text-center mb-16">
+            <h2 className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4">
+              PROGRAMS
+            </h2>
+            <p className="font-inter text-zinc-400 max-w-xl mx-auto">
+              Automotive, Motorsport & Media Skill Programmes
+            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-5">
@@ -540,12 +548,13 @@ const LandingPage = () => {
       <section className="py-24 relative">
         <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         <div className="max-w-7xl mx-auto px-6">
-          <div ref={useFadeUp(30)} className="text-center mb-12">
-            <p className="font-inter text-xs text-primary tracking-[0.2em] uppercase mb-3">Gallery</p>
+          <div className="text-center mb-12">
             <h2 className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4">
               EXPERIENCE <span className="text-secondary">KXGRID</span>
             </h2>
-            <p className="font-inter text-zinc-400 max-w-xl mx-auto">See our students, trainers, and brands in action</p>
+            <p className="font-inter text-zinc-400 max-w-xl mx-auto">
+              See our students, trainers, and brands in action
+            </p>
           </div>
 
           <div style={{ height: '500px', position: 'relative', overflow: 'hidden' }} className="rounded-2xl bg-gradient-to-b from-zinc-900/50 to-transparent border border-white/5">
@@ -570,16 +579,14 @@ const LandingPage = () => {
 
       {/* ── CTA ── */}
       <section className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary/15 to-primary/15 opacity-60" />
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-        <div ref={ctaRef} className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <p className="font-inter text-xs text-primary tracking-[0.2em] uppercase mb-4">Join Us</p>
+        <div className="absolute inset-0 bg-gradient-to-r from-secondary/20 to-primary/20 opacity-50" />
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <h2 className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-6">
             READY TO <span className="gradient-text">JOIN?</span>
           </h2>
           <p className="font-inter text-lg text-zinc-400 mb-10">
             Explore our programmes and start your journey today
-          </p>
+          </ScrollReveal>
           <Magnet padding={70} magnetStrength={30}>
             <Button onClick={() => navigate('/programs')} className="btn-primary h-14 px-12 text-lg" data-testid="cta-programs-btn">
               View Programs
@@ -591,11 +598,13 @@ const LandingPage = () => {
       {/* ── Partners Marquee ── */}
       {partners.length > 0 && (
         <section className="py-12 md:py-16 border-t border-white/5 overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 md:px-6 mb-8">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-8">
             <h2 className="font-unbounded font-bold text-xl md:text-2xl text-white text-center mb-2">
-              OUR <span className="gradient-text">PARTNERS &amp; SPONSORS</span>
+              OUR <span className="gradient-text">PARTNERS & SPONSORS</span>
             </h2>
-            <p className="text-xs md:text-sm text-zinc-500 text-center">Trusted by industry leaders</p>
+            <p className="text-xs md:text-sm text-zinc-500 text-center">
+              Trusted by industry leaders
+            </p>
           </div>
 
           {partners.filter(p => p.is_featured).length > 0 && (
@@ -692,10 +701,11 @@ const LandingPage = () => {
       {/* ── Director ── */}
       {director && (
         <section className="py-20 border-t border-white/5">
-          <div ref={directorRef} className="max-w-5xl mx-auto px-6">
+          <div className="max-w-5xl mx-auto px-6">
             <h2 className="font-unbounded font-bold text-2xl text-white text-center mb-12">
               MESSAGE FROM <span className="gradient-text">PROGRAMME DIRECTOR</span>
             </h2>
+
             <div className="relative rounded-3xl overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 opacity-50" />
               <div className="absolute inset-0 backdrop-blur-md bg-white/[0.02] border border-white/10 rounded-3xl group-hover:border-primary/30 transition-colors" />
@@ -737,15 +747,20 @@ const LandingPage = () => {
 
       {/* ── Contact ── */}
       <section className="py-20 border-t border-white/5 bg-gradient-to-b from-transparent to-black/20">
-        <div ref={contactRef} className="max-w-4xl mx-auto px-6 text-center">
-          <p className="font-inter text-xs text-primary tracking-[0.2em] uppercase mb-4">Get In Touch</p>
+        <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="font-unbounded font-bold text-3xl md:text-4xl text-white mb-4">
             {contactInfo?.heading_text || "Have Questions? Let's Connect"}
-          </h2>
-          <p className="font-inter text-lg text-zinc-400 mb-10">
+          </GlitchText>
+          <ScrollReveal
+            baseOpacity={0.2}
+            enableBlur={true}
+            baseRotation={2}
+            blurStrength={4}
+          >
             {contactInfo?.subheading_text || "Our admission and academic team will guide you through the right pathway"}
           </p>
 
+          {/* Contact CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <Magnet padding={60} magnetStrength={35}>
               <Button onClick={() => setCallbackOpen(true)} className="btn-primary h-14 px-8 gap-2 w-full sm:w-auto" data-testid="request-callback-btn">
@@ -840,19 +855,19 @@ const LandingPage = () => {
                   { href: contactInfo?.social_links?.facebook || 'https://facebook.com/kotlerx', color: 'blue-500', shadow: '59,130,246', path: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z', testid: 'social-facebook' },
                 ].map(() => null)}
                 <a href={contactInfo?.social_links?.facebook || 'https://facebook.com/kotlerx'} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-zinc-600/50 flex items-center justify-center hover:border-blue-500 hover:scale-110 transition-all duration-300" data-testid="social-facebook">
-                  <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                  <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
                 </a>
                 <a href={contactInfo?.social_links?.twitter || 'https://x.com/kotlerx'} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-zinc-600/50 flex items-center justify-center hover:border-white hover:scale-110 transition-all duration-300" data-testid="social-twitter">
-                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
                 </a>
                 <a href={contactInfo?.social_links?.instagram || 'https://instagram.com/kotlerx'} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-zinc-600/50 flex items-center justify-center hover:border-pink-500 hover:scale-110 transition-all duration-300" data-testid="social-instagram">
                   <svg className="w-5 h-5" fill="url(#ig-grad)" viewBox="0 0 24 24">
-                    <defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stopColor="#FFDC80"/><stop offset="50%" stopColor="#E1306C"/><stop offset="100%" stopColor="#833AB4"/></linearGradient></defs>
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                    <defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stopColor="#FFDC80" /><stop offset="50%" stopColor="#E1306C" /><stop offset="100%" stopColor="#833AB4" /></linearGradient></defs>
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
                   </svg>
                 </a>
                 <a href={contactInfo?.social_links?.youtube || 'https://youtube.com/@kotlerx'} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-zinc-600/50 flex items-center justify-center hover:border-red-500 hover:scale-110 transition-all duration-300" data-testid="social-youtube">
-                  <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                  <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
                 </a>
                 <a href="https://kotlerx.in" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-zinc-600/50 flex items-center justify-center hover:border-purple-500 hover:scale-110 transition-all duration-300" data-testid="social-kxroot">
                   <img src={kotlerxLogo} alt="KotlerX" className="w-6 h-6 object-contain" />
