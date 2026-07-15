@@ -21,7 +21,7 @@ const BlurText = ({
   rootMargin = '0px',
   animationFrom,
   animationTo,
-  easing = t => t,
+  easing = 'easeOut',
   onAnimationComplete,
   stepDuration = 0.35
 }) => {
