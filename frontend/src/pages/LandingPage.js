@@ -502,7 +502,7 @@ const LandingPage = () => {
             />
             <p className="font-inter text-zinc-400 max-w-xl mx-auto">
               One platform connecting all operations, departments, and stakeholders
-            </ScrollReveal>
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -586,7 +586,7 @@ const LandingPage = () => {
           </h2>
           <p className="font-inter text-lg text-zinc-400 mb-10">
             Explore our programmes and start your journey today
-          </ScrollReveal>
+          </p>
           <Magnet padding={70} magnetStrength={30}>
             <Button onClick={() => navigate('/programs')} className="btn-primary h-14 px-12 text-lg" data-testid="cta-programs-btn">
               View Programs
@@ -750,13 +750,8 @@ const LandingPage = () => {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="font-unbounded font-bold text-3xl md:text-4xl text-white mb-4">
             {contactInfo?.heading_text || "Have Questions? Let's Connect"}
-          </GlitchText>
-          <ScrollReveal
-            baseOpacity={0.2}
-            enableBlur={true}
-            baseRotation={2}
-            blurStrength={4}
-          >
+          </h2>
+          <p className="font-inter text-lg text-zinc-400 mb-10">
             {contactInfo?.subheading_text || "Our admission and academic team will guide you through the right pathway"}
           </p>
 
