@@ -63,65 +63,9 @@ async def login(data: UserLogin):
 
 @router.post("/auth/session")
 async def create_session(request: Request, response: Response):
-    session_id = request.headers.get("X-Session-ID")
-    if not session_id:
-        raise HTTPException(status_code=400, detail="Session ID required")
-    
-    async with httpx.AsyncClient() as client:
-        resp = await client.get(
-            "https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data",
-            headers={"X-Session-ID": session_id}
-        )
-        if resp.status_code != 200:
-            raise HTTPException(status_code=401, detail="Invalid session")
-        
-        oauth_data = resp.json()
-    
-    # Check if user exists
-    user = await db.users.find_one({"email": oauth_data["email"]}, {"_id": 0})
-    if not user:
-        user_id = f"user_{uuid.uuid4().hex[:12]}"
-        user = {
-            "user_id": user_id,
-            "email": oauth_data["email"],
-            "name": oauth_data["name"],
-            "picture": oauth_data.get("picture"),
-            "role": "student",
-            "created_at": datetime.now(timezone.utc).isoformat()
-        }
-        await db.users.insert_one(user)
-    else:
-        user_id = user["user_id"]
-        await db.users.update_one(
-            {"user_id": user_id},
-            {"$set": {"name": oauth_data["name"], "picture": oauth_data.get("picture")}}
-        )
-    
-    # Create session
-    session_token = oauth_data.get("session_token", f"sess_{uuid.uuid4().hex}")
-    expires_at = datetime.now(timezone.utc) + timedelta(days=7)
-    
-    await db.user_sessions.insert_one({
-        "user_id": user_id,
-        "session_token": session_token,
-        "expires_at": expires_at.isoformat(),
-        "created_at": datetime.now(timezone.utc).isoformat()
-    })
-    
-    token = create_token(user_id, "student")  # Create a token to return for the frontend
-    
-    response.set_cookie(
-        key="session_token",
-        value=session_token,
-        httponly=True,
-        secure=False,  # Allow HTTP for localhost
-        samesite="lax",
-        path="/",
-        max_age=7*24*60*60
-    )
-    
-    user_response = await db.users.find_one({"user_id": user_id}, {"_id": 0, "password_hash": 0})
-    return {"token": token, **user_response}
+    # Google OAuth via Emergent AI has been removed.
+    # Implement your own OAuth provider here.
+    raise HTTPException(status_code=501, detail="OAuth session login not configured")
 
 @router.get("/auth/me")
 async def get_me(user: dict = Depends(get_current_user)):
