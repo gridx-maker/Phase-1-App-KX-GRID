@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import kotlerxLogo from '../images/Vertical Logo with BG-01.png';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
@@ -75,7 +76,7 @@ const KXCraftPage = () => {
               <ArrowLeft className="w-5 h-5" />
             </button>
             <div className="overflow-hidden h-8 md:h-10 flex items-center">
-              <img src="https://customer-assets.emergentagent.com/job_b4ac6a41-177f-4a95-b224-80c582d4333d/artifacts/mctfn4tr_Typograpghy%20White%20Transparent-04.png" alt="KotlerX" className="h-32 md:h-44 object-contain" />
+              <img src={kotlerxLogo} alt="KotlerX" className="h-32 md:h-44 object-contain" />
             </div>
           </div>
           <Button 
@@ -120,7 +121,7 @@ const KXCraftPage = () => {
             {/* Big KX Craft logo on right */}
             <div className="flex items-center justify-center flex-shrink-0">
               <img 
-                src="https://customer-assets.emergentagent.com/job_b4ac6a41-177f-4a95-b224-80c582d4333d/artifacts/pv00c127_Craft%20White%20Transparent.png" 
+                src={kotlerxLogo} 
                 alt="KX Craft" 
                 className="w-[180px] md:w-[400px] lg:w-[500px] h-auto object-contain opacity-90"
               />
@@ -269,7 +270,7 @@ const KXCraftPage = () => {
       {/* Footer */}
       <footer className="py-6 md:py-8 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
-          <img src="https://customer-assets.emergentagent.com/job_b4ac6a41-177f-4a95-b224-80c582d4333d/artifacts/pv00c127_Craft%20White%20Transparent.png" alt="KX Craft" className="h-10 mx-auto mb-2 object-contain" />
+          <img src={kotlerxLogo} alt="KX Craft" className="h-10 mx-auto mb-2 object-contain" />
           <p className="text-xs md:text-sm text-zinc-500">
             A KotlerX Initiative
           </p>
@@ -280,3 +281,4 @@ const KXCraftPage = () => {
 };
 
 export default KXCraftPage;
+
