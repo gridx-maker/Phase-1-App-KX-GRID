@@ -2,19 +2,6 @@
 
 <div align="center">
 
-[![Status: Active](https://img.shields.io/badge/Status-Active-brightgreen)](#)
-[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688)](https://fastapi.tiangolo.com/)
-[![React](https://img.shields.io/badge/Frontend-React-61DAFB)](https://react.dev/)
-[![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-4169E1)](https://www.postgresql.org/)
-[![PWA](https://img.shields.io/badge/PWA-Enabled-5A0FC8)](#)
-
-**Central hub for all KotlerX brands, programs, students, crew, and partners.**  
-Role-based access platform with NFC systems, admin panels, and full digital operations.
-
-**Production:** [https://kotlerx.in](https://kotlerx.in)
-
-</div>
-
 ---
 
 ## 📋 Table of Contents
@@ -35,6 +22,7 @@ Role-based access platform with NFC systems, admin panels, and full digital oper
 ## 🌟 Project Overview
 
 KXGRID is a full-stack **digital operating system** for the KotlerX ecosystem. It serves as the central hub connecting:
+
 - All **KotlerX brands** and programs
 - **Students** and their progress tracking
 - **Crew/Trainers** managing attendance and assessments
@@ -181,13 +169,13 @@ Phase-1-App-KX-GRID/
 
 ## 👥 User Roles
 
-| Role | Access Level | Landing Page |
-|---|---|---|
-| **Public** | Landing page, brand pages, programs | `/` |
-| **Student** | Dashboard, certificates, leaderboard | `/dashboard` |
-| **Crew / Trainer** | Attendance, assessments, trainer panel | `/crew` |
-| **Brand Head** | Brand operations, reclasses, reports | `/brand-head` |
-| **Admin** | Full CRUD — students, programs, NFC, leads | `/admin` |
+| Role                            | Access Level                                 | Landing Page     |
+| ------------------------------- | -------------------------------------------- | ---------------- |
+| **Public**                | Landing page, brand pages, programs          | `/`            |
+| **Student**               | Dashboard, certificates, leaderboard         | `/dashboard`   |
+| **Crew / Trainer**        | Attendance, assessments, trainer panel       | `/crew`        |
+| **Brand Head**            | Brand operations, reclasses, reports         | `/brand-head`  |
+| **Admin**                 | Full CRUD — students, programs, NFC, leads  | `/admin`       |
 | **KX ROOT (Super Admin)** | All admin features + user & brand management | `/super-admin` |
 
 ---
@@ -237,34 +225,40 @@ graph TD
 ## ✨ Features
 
 ### 🔐 Authentication
+
 - Email/password login with JWT tokens
 - OAuth callback support
 - NFC-triggered login flow
 - Role-based redirect on login
 
 ### 👨‍🎓 Student Portal
+
 - Full student registration & onboarding
 - Dashboard with program progress
 - Digital ID card (NFC-triggered)
 - Certificates & leaderboard
 
 ### 🏷️ Brand & Program Management
+
 - Multi-brand support with individual brand pages
 - Program listing with category filters
 - Unit progress tracking
 - Flex Assessment Builder
 
 ### 👷 Crew / Trainer
+
 - Attendance session management
 - NFC-based attendance scanning
 - Assessment category management
 - Offline queue with sync
 
 ### 🛒 KXCraft E-Commerce
+
 - Admin-manageable product listings
 - Buy Now buttons on product cards
 
 ### 🛡️ Admin Panel
+
 - CRUD for students, programs, brands, leads
 - NFC user management
 - Workshop registration + CSV export
@@ -273,6 +267,7 @@ graph TD
 - Google Sheets integration
 
 ### 📱 PWA
+
 - Service worker for offline capability
 - Installable on mobile/desktop
 
@@ -281,44 +276,48 @@ graph TD
 ## 🛠️ Tech Stack
 
 ### Frontend
-| Technology | Purpose |
-|---|---|
-| React 19 | UI framework |
-| CRACO | CRA config override (webpack + ESLint) |
-| TailwindCSS | Utility-first CSS |
-| shadcn/ui | Pre-built accessible UI components |
-| React Router v7 | Client-side routing |
-| Axios | HTTP client |
-| Recharts | Data visualization |
-| react-hook-form + zod | Form validation |
-| Sonner | Toast notifications |
+
+| Technology            | Purpose                                |
+| --------------------- | -------------------------------------- |
+| React 19              | UI framework                           |
+| CRACO                 | CRA config override (webpack + ESLint) |
+| TailwindCSS           | Utility-first CSS                      |
+| shadcn/ui             | Pre-built accessible UI components     |
+| React Router v7       | Client-side routing                    |
+| Axios                 | HTTP client                            |
+| Recharts              | Data visualization                     |
+| react-hook-form + zod | Form validation                        |
+| Sonner                | Toast notifications                    |
 
 ### Backend
-| Technology | Purpose |
-|---|---|
-| FastAPI | Python async API framework |
-| asyncpg | Async PostgreSQL client driver |
-| PostgreSQL | Primary database |
-| PyJWT + python-jose | JWT auth |
-| bcrypt | Password hashing |
-| Twilio | SMS notifications |
-| Resend | Transactional email |
-| gspread | Google Sheets integration |
-| qrcode | QR code generation (for digital certificates) |
-| google-auth-oauthlib | Google OAuth authentication |
-| python-dotenv | Environment config |
-| uvicorn | ASGI server |
+
+| Technology           | Purpose                                       |
+| -------------------- | --------------------------------------------- |
+| FastAPI              | Python async API framework                    |
+| asyncpg              | Async PostgreSQL client driver                |
+| PostgreSQL           | Primary database                              |
+| PyJWT + python-jose  | JWT auth                                      |
+| bcrypt               | Password hashing                              |
+| Twilio               | SMS notifications                             |
+| Resend               | Transactional email                           |
+| gspread              | Google Sheets integration                     |
+| qrcode               | QR code generation (for digital certificates) |
+| google-auth-oauthlib | Google OAuth authentication                   |
+| python-dotenv        | Environment config                            |
+| uvicorn              | ASGI server                                   |
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Python 3.10+
 - Node.js 18+
 - PostgreSQL database server
 
 ### 1. Backend Setup
+
 ```bash
 cd backend
 
@@ -330,10 +329,11 @@ pip install -r requirements.txt
 uvicorn server:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-The API will be live at `http://localhost:8000`  
+The API will be live at `http://localhost:8000`
 Interactive docs: `http://localhost:8000/docs`
 
 ### 2. Frontend Setup
+
 ```bash
 cd frontend
 
@@ -352,6 +352,7 @@ The app will open at `http://localhost:3000`
 ## 🔧 Environment Variables
 
 ### `backend/.env`
+
 ```env
 POSTGRES_URL=postgresql://postgres:postgres@localhost:5432/kxgrid_db
 JWT_SECRET_KEY=your_secret_key_here
@@ -368,6 +369,7 @@ GROQ_API_KEY=your_groq_api_key_here
 ```
 
 ### `frontend/.env`
+
 ```env
 REACT_APP_BACKEND_URL=http://localhost:8000
 ```
@@ -380,23 +382,23 @@ The full interactive API reference is available at `http://localhost:8000/docs`.
 
 Key route groups in `server.py`:
 
-| Prefix | Description |
-|---|---|
-| `/api/auth/` | Login, register, OAuth, token verify |
-| `/api/students/` | Student CRUD, registration, progress |
-| `/api/programs/` | Programs, units, enrollments |
-| `/api/brands/` | Brand management |
-| `/api/admin/` | Admin panel operations |
-| `/api/super-admin/` | Super admin / KX ROOT operations |
-| `/api/nfc/` | NFC attendance & login |
-| `/api/leads/` | Contact form & lead management |
-| `/api/certificates/` | Certificate generation & listing |
-| `/api/leaderboard/` | Program leaderboards |
-| `/api/team/` | Team member management |
-| `/api/kxcraft/` | KXCraft product management |
-| `/api/sms/` | Twilio SMS (via router) |
-| `/api/sheets/` | Google Sheets export (via router) |
-| `/health` | Server health check |
+| Prefix                 | Description                          |
+| ---------------------- | ------------------------------------ |
+| `/api/auth/`         | Login, register, OAuth, token verify |
+| `/api/students/`     | Student CRUD, registration, progress |
+| `/api/programs/`     | Programs, units, enrollments         |
+| `/api/brands/`       | Brand management                     |
+| `/api/admin/`        | Admin panel operations               |
+| `/api/super-admin/`  | Super admin / KX ROOT operations     |
+| `/api/nfc/`          | NFC attendance & login               |
+| `/api/leads/`        | Contact form & lead management       |
+| `/api/certificates/` | Certificate generation & listing     |
+| `/api/leaderboard/`  | Program leaderboards                 |
+| `/api/team/`         | Team member management               |
+| `/api/kxcraft/`      | KXCraft product management           |
+| `/api/sms/`          | Twilio SMS (via router)              |
+| `/api/sheets/`       | Google Sheets export (via router)    |
+| `/health`            | Server health check                  |
 
 ---
 
@@ -404,31 +406,31 @@ Key route groups in `server.py`:
 
 > ⚠️ Change all passwords immediately in production!
 
-| Role | Email | Password |
-|---|---|---|
-| **KX ROOT** (Super Admin) | `root@kotlerx.com` | `KXRoot@2024` |
-| **Admin** | `admin@kotlerx.com` | `admin123` |
-| **Brand Head** | `KXGRIDBH@kotlerx.com` | `brandmgr123` |
-| **Crew** | `crew@kotlerx.com` | `crew123` |
-| **Student** | `regularstudent@kotlerx.com` | `student123` |
+| Role                            | Email                          | Password        |
+| ------------------------------- | ------------------------------ | --------------- |
+| **KX ROOT** (Super Admin) | `root@kotlerx.com`           | `KXRoot@2024` |
+| **Admin**                 | `admin@kotlerx.com`          | `admin123`    |
+| **Brand Head**            | `KXGRIDBH@kotlerx.com`       | `brandmgr123` |
+| **Crew**                  | `crew@kotlerx.com`           | `crew123`     |
+| **Student**               | `regularstudent@kotlerx.com` | `student123`  |
 
 ---
 
 ## 🗺️ Roadmap
 
-- [x] Multi-role auth (JWT + OAuth)
-- [x] Brand & Program management
-- [x] NFC attendance system
-- [x] Admin panel (CRUD for all entities)
-- [x] Super Admin panel (KX ROOT)
-- [x] PWA (offline service worker)
-- [x] KXCraft e-commerce page
-- [x] Promotional banner carousel
-- [x] Bulk team import + JSON export
-- [x] Google Sheets integration
-- [x] Refactor `server.py` into separate router modules
+- [X] Multi-role auth (JWT + OAuth)
+- [X] Brand & Program management
+- [X] NFC attendance system
+- [X] Admin panel (CRUD for all entities)
+- [X] Super Admin panel (KX ROOT)
+- [X] PWA (offline service worker)
+- [X] KXCraft e-commerce page
+- [X] Promotional banner carousel
+- [X] Bulk team import + JSON export
+- [X] Google Sheets integration
+- [X] Refactor `server.py` into separate router modules
 - [ ] Refactor `AdminPanel.js` (6500+ lines → split by domain)
-- [x] Fix conditional occupation field in Student Registration
+- [X] Fix conditional occupation field in Student Registration
 - [ ] Push notifications
 - [ ] Crew performance analytics
 - [ ] Sponsor & Partner engine with tiers
