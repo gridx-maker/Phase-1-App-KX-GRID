@@ -500,9 +500,16 @@ const LandingPage = () => {
               tag="h2"
               className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4"
             />
-            <p className="font-inter text-zinc-400 max-w-xl mx-auto">
-              One platform connecting all operations, departments, and stakeholders
-            </p>
+            <ScrollReveal
+              enableBlur={true}
+              baseOpacity={0.2}
+              blurStrength={3}
+              containerClassName="!inline"
+            >
+              <p className="font-inter text-zinc-400 max-w-xl mx-auto">
+                One platform connecting all operations, departments, and stakeholders
+              </p>
+            </ScrollReveal>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -524,9 +531,16 @@ const LandingPage = () => {
             <h2 className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4">
               PROGRAMS
             </h2>
-            <p className="font-inter text-zinc-400 max-w-xl mx-auto">
-              Automotive, Motorsport & Media Skill Programmes
-            </p>
+            <ScrollReveal
+              enableBlur={true}
+              baseOpacity={0.2}
+              blurStrength={3}
+              containerClassName="!inline"
+            >
+              <p className="font-inter text-zinc-400 max-w-xl mx-auto">
+                Automotive, Motorsport & Media Skill Programmes
+              </p>
+            </ScrollReveal>
           </div>
 
           <div className="grid md:grid-cols-3 gap-5">
@@ -552,9 +566,16 @@ const LandingPage = () => {
             <h2 className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4">
               EXPERIENCE <span className="text-secondary">KXGRID</span>
             </h2>
-            <p className="font-inter text-zinc-400 max-w-xl mx-auto">
-              See our students, trainers, and brands in action
-            </p>
+            <ScrollReveal
+              enableBlur={true}
+              baseOpacity={0.2}
+              blurStrength={3}
+              containerClassName="!inline"
+            >
+              <p className="font-inter text-zinc-400 max-w-xl mx-auto">
+                See our students, trainers, and brands in action
+              </p>
+            </ScrollReveal>
           </div>
 
           <div style={{ height: '500px', position: 'relative', overflow: 'hidden' }} className="rounded-2xl bg-gradient-to-b from-zinc-900/50 to-transparent border border-white/5">
