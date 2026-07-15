@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import ScrollReveal from '@/components/ui/ScrollReveal';
 import axios from 'axios';
 import { 
   ArrowLeft, ExternalLink, ShoppingBag, Star, Gift, 
@@ -96,13 +97,23 @@ const KXCraftPage = () => {
         <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
           <div className="flex flex-col-reverse md:flex-row items-center justify-between">
             <div className="max-w-2xl flex-1">
-              <h2 className="font-unbounded font-bold text-3xl md:text-5xl lg:text-6xl text-white mt-3 mb-4 leading-tight">
-              Motorsport<br />
-              <span className="text-amber-400">Collectibles</span>
-            </h2>
-            <p className="font-inter text-sm md:text-lg text-zinc-400 mb-6 md:mb-8 max-w-lg">
-              Premium handcrafted wooden products inspired by the world of motorsport. Each piece tells a story of speed, precision, and passion.
-            </p>
+              <ScrollReveal
+                baseOpacity={0}
+                enableBlur={true}
+                baseRotation={4}
+                blurStrength={8}
+                containerClassName="mb-4"
+              >
+                Motorsport Collectibles
+              </ScrollReveal>
+              <ScrollReveal
+                baseOpacity={0.2}
+                enableBlur={true}
+                baseRotation={2}
+                blurStrength={4}
+              >
+                Premium handcrafted wooden products inspired by the world of motorsport. Each piece tells a story of speed, precision, and passion.
+              </ScrollReveal>
             <div className="flex flex-wrap gap-3">
               <Button 
                 onClick={() => document.getElementById('kxcraft-products')?.scrollIntoView({ behavior: 'smooth' })}

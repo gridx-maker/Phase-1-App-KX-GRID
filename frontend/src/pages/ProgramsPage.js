@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
+import ScrollReveal from '@/components/ui/ScrollReveal';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -223,18 +224,24 @@ const ProgramsPage = () => {
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-          
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={4}
+            blurStrength={8}
+            containerClassName="text-center mb-6"
+          >
+            Unlock Your Full Potential
+          </ScrollReveal>
 
-          <h1 className="text-5xl md:text-6xl font-unbounded font-black tracking-tight mb-6 text-white leading-tight animate-fade-in" style={{ animationDelay: '0.1s' }}>
-            Unlock Your
-            <span className="block bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent">
-              Full Potential
-            </span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in font-inter" style={{ animationDelay: '0.2s' }}>
+          <ScrollReveal
+            baseOpacity={0.2}
+            enableBlur={true}
+            baseRotation={2}
+            blurStrength={4}
+          >
             Choose your path to excellence with our comprehensive programs in automotive, motorsport, and media. Find the perfect fit for your career goals.
-          </p>
+          </ScrollReveal>
 
           {/* Quick Stats */}
           <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto mb-10 animate-fade-in" style={{ animationDelay: '0.3s' }}>

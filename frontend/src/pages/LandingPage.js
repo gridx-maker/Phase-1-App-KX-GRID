@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SplitText from '@/components/ui/SplitText';
 import BlurText from '@/components/ui/BlurText';
 import DecryptedText from '@/components/ui/DecryptedText';
+import ScrollReveal from '@/components/ui/ScrollReveal';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -383,14 +384,23 @@ const LandingPage = () => {
       <section id="features" className="py-32 relative">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <SplitText 
-              text="UNIFIED PLATFORM" 
-              tag="h2" 
-              className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4" 
-            />
-            <p className="font-inter text-zinc-400 max-w-xl mx-auto">
+            <ScrollReveal
+              baseOpacity={0}
+              enableBlur={true}
+              baseRotation={3}
+              blurStrength={6}
+              containerClassName="text-center"
+            >
+              UNIFIED PLATFORM
+            </ScrollReveal>
+            <ScrollReveal
+              baseOpacity={0.2}
+              enableBlur={true}
+              baseRotation={2}
+              blurStrength={4}
+            >
               One platform connecting all operations, departments, and stakeholders
-            </p>
+            </ScrollReveal>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -431,12 +441,23 @@ const LandingPage = () => {
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4">
+            <ScrollReveal
+              baseOpacity={0}
+              enableBlur={true}
+              baseRotation={3}
+              blurStrength={6}
+              containerClassName="text-center"
+            >
               PROGRAMS
-            </h2>
-            <p className="font-inter text-zinc-400 max-w-xl mx-auto">
+            </ScrollReveal>
+            <ScrollReveal
+              baseOpacity={0.2}
+              enableBlur={true}
+              baseRotation={2}
+              blurStrength={4}
+            >
               Automotive, Motorsport & Media Skill Programmes
-            </p>
+            </ScrollReveal>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -487,12 +508,23 @@ const LandingPage = () => {
       <section className="py-24 relative">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-4">
-              EXPERIENCE <span className="text-secondary">KXGRID</span>
-            </h2>
-            <p className="font-inter text-zinc-400 max-w-xl mx-auto">
+            <ScrollReveal
+              baseOpacity={0}
+              enableBlur={true}
+              baseRotation={3}
+              blurStrength={6}
+              containerClassName="text-center"
+            >
+              EXPERIENCE KXGRID
+            </ScrollReveal>
+            <ScrollReveal
+              baseOpacity={0.2}
+              enableBlur={true}
+              baseRotation={2}
+              blurStrength={4}
+            >
               See our students, trainers, and brands in action
-            </p>
+            </ScrollReveal>
           </div>
 
           {/* Interactive Image Trail */}
@@ -528,12 +560,23 @@ const LandingPage = () => {
       <section className="py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-secondary/20 to-primary/20 opacity-50" />
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <h2 className="font-unbounded font-bold text-4xl md:text-5xl text-white mb-6">
-            READY TO <span className="gradient-text">JOIN?</span>
-          </h2>
-          <p className="font-inter text-lg text-zinc-400 mb-10">
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={4}
+            blurStrength={8}
+            containerClassName="text-center mb-6"
+          >
+            READY TO JOIN?
+          </ScrollReveal>
+          <ScrollReveal
+            baseOpacity={0.2}
+            enableBlur={true}
+            baseRotation={2}
+            blurStrength={4}
+          >
             Explore our programmes and start your journey today
-          </p>
+          </ScrollReveal>
           <Magnet padding={70} magnetStrength={30}>
             <Button
               onClick={() => navigate('/programs')}
@@ -550,12 +593,23 @@ const LandingPage = () => {
       {partners.length > 0 && (
         <section className="py-12 md:py-16 border-t border-white/5 overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-8">
-            <h2 className="font-unbounded font-bold text-xl md:text-2xl text-white text-center mb-2">
-              OUR <span className="gradient-text">PARTNERS & SPONSORS</span>
-            </h2>
-            <p className="text-xs md:text-sm text-zinc-500 text-center">
+            <ScrollReveal
+              baseOpacity={0}
+              enableBlur={true}
+              baseRotation={2}
+              blurStrength={4}
+              containerClassName="text-center mb-2"
+            >
+              OUR PARTNERS & SPONSORS
+            </ScrollReveal>
+            <ScrollReveal
+              baseOpacity={0.3}
+              enableBlur={true}
+              baseRotation={1}
+              blurStrength={2}
+            >
               Trusted by industry leaders
-            </p>
+            </ScrollReveal>
           </div>
 
           {/* Featured Partners - Big Logos */}
@@ -714,9 +768,15 @@ const LandingPage = () => {
       {director && (
         <section className="py-20 border-t border-white/5">
           <div className="max-w-5xl mx-auto px-6">
-            <h2 className="font-unbounded font-bold text-2xl text-white text-center mb-12">
-              MESSAGE FROM <span className="gradient-text">PROGRAMME DIRECTOR</span>
-            </h2>
+            <ScrollReveal
+              baseOpacity={0}
+              enableBlur={true}
+              baseRotation={3}
+              blurStrength={6}
+              containerClassName="text-center mb-12"
+            >
+              MESSAGE FROM PROGRAMME DIRECTOR
+            </ScrollReveal>
             
             <div className="relative rounded-3xl overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 opacity-50" />
@@ -772,12 +832,23 @@ const LandingPage = () => {
       {/* Contact Section */}
       <section className="py-20 border-t border-white/5 bg-gradient-to-b from-transparent to-black/20">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="font-unbounded font-bold text-3xl md:text-4xl text-white mb-4">
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={3}
+            blurStrength={6}
+            containerClassName="text-center mb-4"
+          >
             {contactInfo?.heading_text || "Have Questions? Let's Connect"}
-          </h2>
-          <p className="font-inter text-lg text-zinc-400 mb-10">
+          </ScrollReveal>
+          <ScrollReveal
+            baseOpacity={0.2}
+            enableBlur={true}
+            baseRotation={2}
+            blurStrength={4}
+          >
             {contactInfo?.subheading_text || "Our admission and academic team will guide you through the right pathway"}
-          </p>
+          </ScrollReveal>
           
           {/* Contact CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import ScrollReveal from '@/components/ui/ScrollReveal';
 import { ChevronLeft, Plus, Minus, Users, GraduationCap, Briefcase } from 'lucide-react';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -132,12 +133,23 @@ const TeamPage = () => {
 
       {/* Hero Section */}
       <section className="py-16 px-6 text-center bg-gradient-to-b from-zinc-900/50 to-transparent">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          Meet The <span className="text-cyan-400">Team</span>
-        </h1>
-        <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+        <ScrollReveal
+          baseOpacity={0}
+          enableBlur={true}
+          baseRotation={3}
+          blurStrength={6}
+          containerClassName="text-center mb-4"
+        >
+          Meet The Team
+        </ScrollReveal>
+        <ScrollReveal
+          baseOpacity={0.2}
+          enableBlur={true}
+          baseRotation={2}
+          blurStrength={4}
+        >
           Our team of dedicated professionals support our students in every way possible to achieve their goals in motorsport education.
-        </p>
+        </ScrollReveal>
         <p className="text-white font-semibold mt-4">
           Monday to Friday 9.00am — 5.00pm IST
         </p>
@@ -201,9 +213,15 @@ const TeamPage = () => {
       {/* CTA Section */}
       <section className="py-16 px-6 bg-gradient-to-t from-zinc-900 to-transparent">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={3}
+            blurStrength={6}
+            containerClassName="text-center mb-4"
+          >
             Ready to Accelerate Your Motorsport Career?
-          </h2>
+          </ScrollReveal>
           <button
             onClick={() => navigate('/register')}
             className="mt-6 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-bold py-4 px-10 rounded-lg transition-all duration-300 hover:scale-105 flex items-center gap-2 mx-auto"
