@@ -1,5 +1,6 @@
 import SplitText from '@/components/ui/SplitText';
 import React, { useState } from 'react';
+import kotlerxLogo from '../images/Vertical Logo with BG-01.png';
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -198,7 +199,7 @@ const LoginPage = () => {
           {/* Logo - BIG */}
           <Link to="/" className="block mb-6">
             <img 
-              src="https://customer-assets.emergentagent.com/job_984a459f-bca4-4f6b-93c3-f060eda8d982/artifacts/jyzi0nv2_IMG_0354.png"
+              src={kotlerxLogo}
               alt="KotlerX"
               className="h-28 md:h-36 w-auto"
             />
@@ -446,7 +447,7 @@ const LoginPage = () => {
       <div className="hidden lg:block flex-1 relative">
         <div 
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(https://static.prod-images.emergentagent.com/jobs/984a459f-bca4-4f6b-93c3-f060eda8d982/images/0b7ec1b02d58d1ff6e1e00a810508c2d7e37a7c4ca0011db63c59151785b287e.png)' }}
+          style={{ backgroundImage: 'url(/assets/login-bg.jpg)' }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/50 to-transparent" />
         <div className="absolute inset-0 flex items-end p-12">
@@ -469,3 +470,4 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+

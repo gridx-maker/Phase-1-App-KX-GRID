@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import kotlerxLogo from '../images/Vertical Logo with BG-01.png';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ChevronLeft, Plus, Minus, Users, GraduationCap, Briefcase } from 'lucide-react';
@@ -123,7 +124,7 @@ const TeamPage = () => {
             Back to Home
           </button>
           <img 
-            src="https://customer-assets.emergentagent.com/job_984a459f-bca4-4f6b-93c3-f060eda8d982/artifacts/jyzi0nv2_IMG_0354.png"
+            src={kotlerxLogo}
             alt="KotlerX"
             className="h-16 md:h-20"
           />
@@ -223,3 +224,4 @@ const TeamPage = () => {
 };
 
 export default TeamPage;
+
