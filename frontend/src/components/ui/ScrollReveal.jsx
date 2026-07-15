@@ -38,28 +38,27 @@ const ScrollReveal = ({
 
     const scroller = scrollContainerRef && scrollContainerRef.current ? scrollContainerRef.current : window;
 
-    gsap.fromTo(
-      el,
-      { transformOrigin: '0% 50%', rotate: baseRotation },
-      {
-        ease: 'none',
-        rotate: 0,
-        scrollTrigger: {
-          trigger: el,
-          scroller,
-          start: 'top bottom',
-          end: rotationEnd,
-          scrub: true
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        el,
+        { transformOrigin: '0% 50%', rotate: baseRotation },
+        {
+          ease: 'none',
+          rotate: 0,
+          scrollTrigger: {
+            trigger: el,
+            scroller,
+            start: 'top bottom',
+            end: rotationEnd,
+            scrub: true
+          }
         }
-      }
-    );
+      );
 
-    const wordElements = el.querySelectorAll('.word');
+      const wordElements = el.querySelectorAll('.word');
 
-    gsap.fromTo(
-      wordElements,
-      { opacity: baseOpacity, willChange: 'opacity' },
-      {
+      const fromProps = { opacity: baseOpacity, willChange: 'opacity' };
+      const toProps = {
         ease: 'none',
         opacity: 1,
         stagger: 0.05,
@@ -70,31 +69,18 @@ const ScrollReveal = ({
           end: wordAnimationEnd,
           scrub: true
         }
+      };
+
+      if (enableBlur) {
+        fromProps.filter = `blur(${blurStrength}px)`;
+        fromProps.willChange = 'opacity, filter';
+        toProps.filter = 'blur(0px)';
       }
-    );
 
-    if (enableBlur) {
-      gsap.fromTo(
-        wordElements,
-        { filter: `blur(${blurStrength}px)` },
-        {
-          ease: 'none',
-          filter: 'blur(0px)',
-          stagger: 0.05,
-          scrollTrigger: {
-            trigger: el,
-            scroller,
-            start: 'top bottom-=20%',
-            end: wordAnimationEnd,
-            scrub: true
-          }
-        }
-      );
-    }
+      gsap.fromTo(wordElements, fromProps, toProps);
+    }, el);
 
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
+    return () => ctx.revert();
   }, [scrollContainerRef, enableBlur, baseRotation, baseOpacity, rotationEnd, wordAnimationEnd, blurStrength]);
 
   return (
